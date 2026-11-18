@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>Chameleon VPN — заставка</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;background:#000;overflow:hidden;color:#EDE6E6;font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Inter',system-ui,sans-serif}
+#stage{position:fixed;inset:0;overflow:hidden;background:radial-gradient(120% 80% at 50% 100%,#1a0306 0%,#070102 45%,#000 75%)}
+canvas{position:absolute;inset:0;width:100%;height:100%}
+#bg{z-index:1}#fg{z-index:3}
+#head{position:absolute;z-index:2;left:50%;transform-origin:50% 86%;will-change:transform,opacity;opacity:0}
+#head svg{display:block;width:100%;height:auto;overflow:visible}
+#flash{position:absolute;inset:0;z-index:5;pointer-events:none;opacity:0;background:radial-gradient(circle at 50% 70%,rgba(255,60,70,.95),rgba(252,18,34,.5) 25%,rgba(80,0,8,.0) 70%)}
+#reveal{position:absolute;inset:0;z-index:6;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;opacity:0;pointer-events:none;
+  background:radial-gradient(140% 90% at 50% 0%,#3a0610 0%,#14020500 60%),linear-gradient(180deg,#0b0102 0%,#000 100%);padding:24px;text-align:center}
+#reveal.on{pointer-events:auto}
+.rv-t{font-size:44px;font-weight:800;letter-spacing:-.02em;line-height:1}
+.rv-t em{font-style:normal;color:#FF2D3A;text-shadow:0 0 28px rgba(255,45,58,.55)}
+.rv-s{font-size:15px;color:rgba(237,230,230,.6)}
+.rv-b{margin-top:18px;display:flex;flex-direction:column;gap:10px;width:min(320px,100%)}
+.btn{height:54px;border-radius:16px;border:0;font:600 16px/1 inherit;font-family:inherit;cursor:pointer;transition:transform .15s}
+.btn:active{transform:scale(.97)}
+.btn.p{background:linear-gradient(180deg,#FF3341,#D80F1E);color:#fff;box-shadow:0 10px 30px -8px rgba(252,18,34,.7),inset 0 1px 0 rgba(255,255,255,.25)}
+.btn.g{background:rgba(255,255,255,.06);color:#EDE6E6;border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(10px)}
+</style>
+</head>
+<body>
+<div id="stage">
+  <canvas id="bg"></canvas>
+  <div id="head">
+    <svg viewBox="0 0 240 240" aria-hidden="true">
+      <defs>
+        <linearGradient id="gHead" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#3a3a3f"/><stop offset=".55" stop-color="#232327"/><stop offset="1" stop-color="#121214"/>
+        </linearGradient>
+        <linearGradient id="gCasque" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#3d3d42"/><stop offset="1" stop-color="#18181b"/>
+        </linearGradient>
+        <radialGradient id="gEye" cx=".42" cy=".38" r=".7">
+          <stop offset="0" stop-color="#46464c"/><stop offset=".7" stop-color="#26262a"/><stop offset="1" stop-color="#161618"/>
+        </radialGradient>
+        <radialGradient id="gMouth" cx=".5" cy=".25" r=".8">
+          <stop offset="0" stop-color="#6b0712"/><stop offset=".45" stop-color="#2a0207"/><stop offset="1" stop-color="#000"/>
+        </radialGradient>
+        <radialGradient id="gPupil" cx=".5" cy=".5" r=".5">
+          <stop offset="0" stop-color="#ff6a73"/><stop offset=".5" stop-color="#FC1222"/><stop offset="1" stop-color="#8a0610"/>
+        </radialGradient>
+        <filter id="glow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <!-- шлем -->
+      <path d="M78 116 C 80 62, 103 22, 120 2 C 137 22, 160 62, 162 116 Z" fill="url(#gCasque)"/>
+      <path d="M90 104 C 92 66, 107 34, 120 12" fill="none" stroke="#FC1222" stroke-width="6" stroke-linecap="round" filter="url(#glow)"/>
+      <path d="M120 18 C 134 40, 150 70, 154 104" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="2" stroke-linecap="round"/>
+      <!-- голова: треугольная, острый подбородок -->
+      <path d="M40 120 C 48 98, 84 90, 120 92 C 156 90, 192 98, 200 120 C 204 146, 176 186, 120 218 C 64 186, 36 146, 40 120 Z" fill="url(#gHead)"/>
+      <path d="M120 96 L 120 140" stroke="rgba(255,255,255,.04)" stroke-width="2"/>
+      <g fill="rgba(255,255,255,.04)">
+        <circle cx="98" cy="110" r="4"/><circle cx="142" cy="110" r="4"/><circle cx="108" cy="124" r="3.5"/><circle cx="132" cy="124" r="3.5"/>
+        <circle cx="86" cy="150" r="3"/><circle cx="154" cy="150" r="3"/><circle cx="98" cy="164" r="2.6"/><circle cx="142" cy="164" r="2.6"/>
+      </g>
+      <circle cx="111" cy="146" r="2.4" fill="#0a0a0b"/><circle cx="129" cy="146" r="2.4" fill="#0a0a0b"/>
+      <!-- пасть -->
+      <path id="mouth" d="M62 152 Q 92 184 120 190 Q 148 184 178 152 Q 148 184 120 190 Q 92 184 62 152 Z" fill="url(#gMouth)"/>
+      <g id="jaw">
+        <path d="M62 152 Q 92 184 120 190 Q 148 184 178 152 C 172 176, 152 200, 120 220 C 88 200, 68 176, 62 152 Z" fill="url(#gHead)"/>
+      </g>
+      <path id="lip" d="M62 152 Q 92 184 120 190 Q 148 184 178 152" fill="none" stroke="#070708" stroke-width="3" stroke-linecap="round"/>
+      <!-- глаза-башенки -->
+      <g id="eyeL" transform="translate(54 128)">
+        <circle r="29" fill="url(#gEye)"/>
+        <circle r="22" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="2"/>
+        <circle r="15" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="2"/>
+        <g class="pup"><circle r="8.5" fill="#0b0b0c"/><circle class="iris" r="4.2" fill="url(#gPupil)" filter="url(#glow)"/></g>
+      </g>
+      <g id="eyeR" transform="translate(186 128)">
+        <circle r="29" fill="url(#gEye)"/>
+        <circle r="22" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="2"/>
+        <circle r="15" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="2"/>
+        <g class="pup"><circle r="8.5" fill="#0b0b0c"/><circle class="iris" r="4.2" fill="url(#gPupil)" filter="url(#glow)"/></g>
+      </g>
+    </svg>
+  </div>
+  <canvas id="fg"></canvas>
+  <div id="flash"></div>
+  <div id="reveal">
+    <div class="rv-t">Chameleon <em>VPN</em></div>
+    <div class="rv-s">Так будет раскрываться приложение</div>
+    <div class="rv-b">
+      <button class="btn p" id="again">Повторить заставку</button>
+      <button class="btn g" id="open">Открыть текущее приложение</button>
+    </div>
+  </div>
+</div>
+<script>
+const tg=window.Telegram?.WebApp;
+if(tg){tg.ready();tg.expand();try{tg.setHeaderColor('#000000');tg.setBackgroundColor('#000000');}catch(e){}
+  if(['ios','android'].includes(tg.platform)&&tg.isVersionAtLeast?.('8.0')){try{tg.requestFullscreen();tg.disableVerticalSwipes();}catch(e){}}}
+const haptic=(s)=>{try{tg?.HapticFeedback?.impactOccurred(s);}catch(e){}};
+
+const DPR=Math.min(window.devicePixelRatio||1,2);
+const bg=document.getElementById('bg'),fg=document.getElementById('fg');
+const bx=bg.getContext('2d'),fx=fg.getContext('2d');
+const head=document.getElementById('head'),jaw=document.getElementById('jaw'),mouth=document.getElementById('mouth');
+const _p=0;const pupils=[...document.querySelectorAll('.pup')];
+const flash=document.getElementById('flash'),reveal=document.getElementById('reveal');
+let W,H,HW,headTop;
+function size(){
+  W=innerWidth;H=innerHeight;
+  [bg,fg].forEach(c=>{c.width=W*DPR;c.height=H*DPR;});
+  bx.setTransform(DPR,0,0,DPR,0,0);fx.setTransform(DPR,0,0,DPR,0,0);
+  HW=Math.min(W*.74,340);head.style.width=HW+'px';
+  headTop=H*.60-HW*.4;head.style.top=headTop+'px';head.style.marginLeft=(-HW/2)+'px';
+}
+size();addEventListener('resize',size);
+// точка рта в экранных координатах (svg 120,178)
+const mouthPt=()=>({x:W/2,y:headTop+HW*(176/240)});
+const lip=document.getElementById('lip');
+
+// ---------- планета (точки материков, как в текущей заставке) ----------
+const ll=(la,lo)=>{const r=Math.PI/180,y=la*r,x=lo*r;return[Math.cos(y)*Math.cos(x),Math.sin(y),Math.cos(y)*Math.sin(x)];};
+const CONT=[
+[[70,-140],[72,-125],[68,-100],[65,-85],[55,-65],[45,-60],[35,-75],[25,-80],[18,-88],[10,-83],[10,-77],[15,-93],[20,-105],[25,-110],[32,-117],[40,-124],[48,-124],[55,-130],[58,-137],[65,-140]],
+[[12,-72],[8,-60],[3,-50],[0,-50],[-5,-35],[-15,-39],[-23,-43],[-35,-57],[-42,-63],[-52,-70],[-55,-66],[-50,-73],[-42,-73],[-25,-70],[-15,-75],[-5,-80],[0,-78],[8,-77]],
+[[36,28],[40,27],[42,22],[45,13],[43,7],[47,5],[51,-2],[51,4],[55,8],[58,12],[60,11],[63,14],[68,18],[70,25],[68,28],[60,25],[55,22],[54,18],[57,15],[54,14],[52,15],[48,17],[46,16],[43,16],[40,18],[36,14]],
+[[37,10],[37,12],[36,15],[30,32],[22,37],[12,44],[5,41],[0,42],[-5,40],[-10,40],[-20,35],[-35,27],[-34,18],[-17,12],[-5,9],[0,9],[5,3],[4,10],[8,3],[5,-5],[4,-7],[10,-17],[14,-17],[20,-17],[28,-12]],
+[[10,78],[22,88],[28,97],[20,110],[8,100],[1,104],[8,98],[16,97],[22,92],[28,87],[30,80],[35,78],[35,72],[45,60],[50,58],[55,62],[60,60],[65,55],[68,58],[73,68],[70,80],[68,90],[70,100],[73,110],[72,140],[68,162],[65,165],[60,165],[52,142],[45,135],[40,122],[35,120],[30,122],[22,108]],
+[[-15,128],[-10,136],[-12,142],[-18,148],[-24,152],[-32,152],[-38,147],[-38,140],[-38,130],[-34,122],[-28,114],[-22,114],[-17,122]],
+[[82,-22],[82,-45],[76,-65],[70,-50],[64,-50],[60,-44],[62,-42],[65,-38],[72,-24],[76,-18],[80,-20]]];
+const pts=[];
+CONT.forEach(c=>{for(let i=0;i<c.length;i++){const a=c[i],b=c[(i+1)%c.length];const n=Math.max(2,Math.ceil(Math.hypot(b[0]-a[0],b[1]-a[1])/2.2));
+  for(let t=0;t<n;t++){const f=t/n;const[x,y,z]=ll(a[0]+(b[0]-a[0])*f,a[1]+(b[1]-a[1])*f);pts.push({x,y,z,k:0,s:.6+Math.random()*.8});
+    if(Math.random()<.45){const[sx,sy,sz]=ll(a[0]+(b[0]-a[0])*f+(Math.random()-.5)*8,a[1]+(b[1]-a[1])*f+(Math.random()-.5)*8);pts.push({x:sx,y:sy,z:sz,k:1,s:.3+Math.random()*.5});}}}});
+const phi=Math.PI*(3-Math.sqrt(5));
+for(let i=0;i<220;i++){const y=1-(i/219)*2,r=Math.sqrt(1-y*y),t=phi*i;pts.push({x:Math.cos(t)*r,y,z:Math.sin(t)*r,k:2,s:.25+Math.random()*.3});}
+
+function drawPlanet(ctx,cx,cy,R,ang,stretch,alpha){
+  if(R<.5||alpha<=0)return;
+  ctx.save();ctx.translate(cx,cy);
+  if(stretch){ctx.rotate(stretch.a);ctx.scale(1+stretch.k,1/(1+stretch.k*.6));ctx.rotate(-stretch.a);}
+  // атмосфера
+  const g=ctx.createRadialGradient(0,0,R*.6,0,0,R*1.45);
+  g.addColorStop(0,`rgba(252,18,34,${.10*alpha})`);g.addColorStop(.6,`rgba(252,18,34,${.07*alpha})`);g.addColorStop(1,'rgba(252,18,34,0)');
+  ctx.fillStyle=g;ctx.beginPath();ctx.arc(0,0,R*1.45,0,7);ctx.fill();
+  const core=ctx.createRadialGradient(-R*.3,-R*.35,0,0,0,R);
+  core.addColorStop(0,`rgba(60,6,12,${.55*alpha})`);core.addColorStop(1,`rgba(10,0,2,${.85*alpha})`);
+  ctx.fillStyle=core;ctx.beginPath();ctx.arc(0,0,R,0,7);ctx.fill();
+  const cA=Math.cos(ang),sA=Math.sin(ang),cT=Math.cos(.38),sT=Math.sin(.38);
+  for(const p of pts){
+    const rx=p.x*cA+p.z*sA,rz=-p.x*sA+p.z*cA;const ty=p.y*cT-rz*sT,tz=p.y*sT+rz*cT;
+    if(tz<-.05)continue;
+    const sc=(tz+1.2)/2.2,lit=Math.max(.15,.5+(-ty)*.25+(-rx)*.25);
+    let a,sz;
+    if(p.k===0){a=sc*.95*lit;sz=p.s*sc*Math.max(.7,R/90);}
+    else if(p.k===1){a=sc*sc*.5*lit;sz=p.s*sc*Math.max(.6,R/100);}
+    else{a=sc*sc*.28;sz=p.s*Math.max(.5,R/120);}
+    ctx.fillStyle=`rgba(255,${40+lit*50|0},${50+lit*40|0},${Math.min(1,a)*alpha})`;
+    ctx.beginPath();ctx.arc(rx*R,-ty*R,Math.max(.25,sz),0,7);ctx.fill();
+  }
+  // блик края
+  ctx.strokeStyle=`rgba(255,70,80,${.35*alpha})`;ctx.lineWidth=Math.max(.6,R*.012);
+  ctx.beginPath();ctx.arc(0,0,R,Math.PI*1.05,Math.PI*1.6);ctx.stroke();
+  ctx.restore();
+}
+
+// ---------- звёзды ----------
+const stars=Array.from({length:170},()=>({x:Math.random(),y:Math.random(),z:Math.random(),tw:Math.random()*6}));
+
+// ---------- пружины / easing ----------
+const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+const ease={out:t=>1-Math.pow(1-t,3),in:t=>t*t*t,inOut:t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,
+  back:t=>{const c=2.2;return 1+(c+1)*Math.pow(t-1,3)+c*Math.pow(t-1,2);},
+  expoIn:t=>t===0?0:Math.pow(2,10*t-10)};
+// затухающая пружина: шаг от 0 к 1 с перелётом
+const spring=t=>t<=0?0:1-Math.exp(-t*9)*Math.cos(t*20);
+const seg=(t,a,b)=>clamp((t-a)/(b-a));
+
+// ---------- хореография (секунды) ----------
+const T={appear:0,jerk:[.75,1.3,1.85],open:2.3,tongueOut:2.42,tongueBack:2.56,swallow:2.84,chomp:2.88,zoom:3.2,end:3.85};
+const scales=[.24,.31,.38,.46]; // масштаб планеты до/после рывков
+let t0=0,raf=0,hapticDone={};
+const FREEZE=new URLSearchParams(location.search).get('t');
+function once(k,fn){if(!hapticDone[k]){hapticDone[k]=1;fn();}}
+
+function frame(now){
+  if(!t0)t0=now;const t=FREEZE!==null?+FREEZE:(now-t0)/1000;
+  const m=mouthPt();
+  // базовая позиция планеты
+  const minS=Math.min(W,H);
+  let gx=W/2,gy=H*.21,ang=t*.35,scl=scales[0];
+  let shake=0;
+  T.jerk.forEach((j,i)=>{
+    const p=spring(t-j);
+    scl+=(scales[i+1]-scales[i])*p;
+    gy+=minS*.022*p;               // каждый рывок чуть ближе к пасти
+    ang+=.55*clamp(spring(t-j)*1.0);
+    if(t>j&&t<j+.25){shake=Math.max(shake,(1-(t-j)/.25)*5);once('j'+i,()=>haptic(i<2?'light':'medium'));}
+  });
+  // дрожь перед захватом
+  if(t>T.jerk[2]+.25&&t<T.tongueBack){const q=seg(t,T.jerk[2]+.25,T.tongueBack);gx+=Math.sin(t*90)*q*2.2;gy+=Math.cos(t*77)*q*1.6;}
+  let R=minS*.5*scl;
+
+  // язык
+  let open=t<T.open?0:t<T.chomp?ease.back(seg(t,T.open,T.open+.16)):1-ease.out(seg(t,T.chomp,T.chomp+.09));
+  if(t>T.zoom)open=ease.out(seg(t,T.zoom,T.zoom+.22))*1.5;
+  const lipGlow=t<T.chomp?0:t<T.zoom?ease.out(seg(t,T.chomp+.05,T.zoom)):1;
+  lip.setAttribute('stroke',lipGlow>0?`rgb(${7+248*lipGlow|0},${7+38*lipGlow|0},${8+50*lipGlow|0})`:'#070708');
+  lip.style.filter=lipGlow>0?`drop-shadow(0 0 ${6*lipGlow}px rgba(255,40,60,.9))`:'';
+  let tongue=null;
+  if(t>=T.tongueOut&&t<T.swallow){
+    if(t<T.tongueBack){const k=ease.out(seg(t,T.tongueOut,T.tongueBack));tongue={x:m.x+(gx-m.x)*k,y:m.y+(gy-m.y)*k};once('tg',()=>haptic('rigid'));}
+    else{ // рывок назад: планета прилипла к языку
+      const k=Math.pow(seg(t,T.tongueBack,T.swallow),3.2);
+      const px=gx+(m.x-gx)*k,py=gy+(m.y-gy)*k;
+      tongue={x:px,y:py};
+      R=R*(1-k*.93);
+      gx=px;gy=py;
+    }
+  }
+  const swallowed=t>=T.swallow;
+  // голова
+  const hIn=ease.out(seg(t,.15,.75));
+  let hs=.92+.08*hIn,hy=(1-hIn)*24,ho=hIn;
+  if(t>T.chomp){const c=seg(t,T.chomp,T.chomp+.35);hs*=1+.06*Math.exp(-c*6)*Math.cos(c*28);}
+  if(t>T.zoom+.12){const z=ease.in(seg(t,T.zoom+.12,T.end));hs*=1+z*16;ho*=1-ease.in(seg(t,T.zoom+.35,T.end));}
+  if(t>T.chomp&&t<T.chomp+.2){shake=Math.max(shake,(1-(t-T.chomp)/.2)*9);once('ch',()=>haptic('heavy'));}
+  const sx=(Math.random()-.5)*shake,sy=(Math.random()-.5)*shake;
+  head.style.opacity=ho;
+  head.style.transform=`translate(${sx}px,${hy+sy}px) scale(${hs})`;
+  jaw.setAttribute('transform',`translate(0 ${open*28})`);
+  const dy=open*28;
+  mouth.setAttribute('d',`M62 152 Q 92 184 120 190 Q 148 184 178 152 Q ${148} ${184+dy} 120 ${190+dy} Q 92 ${184+dy} 62 152 Z`);
+  // глаза следят за планетой (каждый сам по себе, с подёргиванием)
+  pupils.forEach((p,i)=>{
+    const ex=W/2+(i?1:-1)*HW*(66/240),ey=headTop+HW*(128/240);
+    let dx=gx-ex,dy=gy-ey;const d=Math.hypot(dx,dy)||1;
+    const lag=i?.0:.06;const jit=Math.sin((t-lag)*3.1+i*2)*.0;
+    const r=Math.min(8,d*.05);
+    p.setAttribute('transform',`translate(${(dx/d*r+jit).toFixed(2)} ${(dy/d*r).toFixed(2)})`);
+  });
+
+  // фон: звёзды, втягиваются в пасть при глотке
+  bx.clearRect(0,0,W,H);
+  const pull=t<T.tongueBack?0:t<T.zoom?ease.in(seg(t,T.tongueBack,T.chomp)):1-ease.out(seg(t,T.zoom,T.end));
+  const sAlpha=ease.out(seg(t,0,.6))*(1-ease.in(seg(t,T.zoom,T.end)));
+  for(const s of stars){
+    let x=s.x*W,y=s.y*H;
+    const dx=m.x-x,dy=m.y-y;
+    const tw=.55+.45*Math.sin(t*2+s.tw);
+    if(pull>0){
+      const k=pull*(.25+s.z*.5);
+      const x2=x+dx*k,y2=y+dy*k;
+      bx.strokeStyle=`rgba(255,${120+s.z*100|0},${130+s.z*90|0},${(.25+s.z*.6)*sAlpha})`;bx.lineWidth=.6+s.z;
+      bx.beginPath();bx.moveTo(x+dx*k*.6,y+dy*k*.6);bx.lineTo(x2,y2);bx.stroke();
+    }else{
+      bx.fillStyle=`rgba(255,${200+s.z*55|0},${200+s.z*55|0},${(.15+s.z*.55)*tw*sAlpha})`;
+      bx.beginPath();bx.arc(x,y,.4+s.z*1.1,0,7);bx.fill();
+    }
+  }
+
+  // передний план: язык + планета
+  fx.clearRect(0,0,W,H);
+  const pAlpha=ease.out(seg(t,.05,.6));
+  if(tongue){
+    const back=t>=T.tongueBack;
+    const tw=Math.max(3,HW*.045);
+    // язык — изогнутая лента от пасти к цели
+    const mx=(m.x+tongue.x)/2+(back?0:Math.sin(t*40)*4),my=(m.y+tongue.y)/2;
+    const grad=fx.createLinearGradient(m.x,m.y,tongue.x,tongue.y);
+    grad.addColorStop(0,'#5a0410');grad.addColorStop(.5,'#d5162a');grad.addColorStop(1,'#ff4a5a');
+    fx.strokeStyle=grad;fx.lineCap='round';fx.lineWidth=tw;
+    fx.shadowColor='rgba(255,40,60,.6)';fx.shadowBlur=14;
+    fx.beginPath();fx.moveTo(m.x,m.y);fx.quadraticCurveTo(mx,my,tongue.x,tongue.y);fx.stroke();
+    // присоска на конце
+    fx.fillStyle='#ff5463';fx.beginPath();fx.arc(tongue.x,tongue.y,tw*1.25,0,7);fx.fill();
+    fx.shadowBlur=0;
+  }
+  if(!swallowed){
+    const st=(t>=T.tongueBack&&t<T.swallow)?{a:Math.atan2(m.y-gy,m.x-gx),k:Math.pow(seg(t,T.tongueBack,T.swallow),2)*1.1}:null;
+    drawPlanet(fx,gx+sx,gy+sy,R,ang,st,pAlpha);
+  }
+  // вспышка
+  const fl=t<T.chomp?0:t<T.chomp+.12?seg(t,T.chomp,T.chomp+.12):1-ease.out(seg(t,T.chomp+.12,T.chomp+.6));
+  const fl2=t<T.zoom+.2?0:ease.inOut(seg(t,T.zoom+.2,T.end))*(1-seg(t,T.end,T.end+.4));
+  flash.style.opacity=Math.max(fl*.75,fl2);
+  flash.style.background=`radial-gradient(circle at 50% ${(m.y/H*100).toFixed(1)}%,rgba(255,60,70,.95),rgba(252,18,34,.5) 25%,rgba(80,0,8,0) 70%)`;
+  // раскрытие приложения
+  const rv=ease.out(seg(t,T.end-.15,T.end+.5));
+  reveal.style.opacity=rv;reveal.style.transform=`scale(${1.06-.06*rv})`;
+  if(rv>.6)reveal.classList.add('on');
+  if(FREEZE===null&&t<T.end+.6)raf=requestAnimationFrame(frame);
+}
+function play(){cancelAnimationFrame(raf);t0=0;hapticDone={};reveal.classList.remove('on');reveal.style.opacity=0;raf=requestAnimationFrame(frame);}
+document.getElementById('again').onclick=play;
+document.getElementById('open').onclick=()=>{location.href='index.html?demo';};
+play();
+</script>
+</body>
+</html>
