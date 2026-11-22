@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Chameleon VPN — открываем приложение</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{display:flex;align-items:center;justify-content:center;padding:24px;background:radial-gradient(120% 60% at 50% 0%,#3d0710,#000 65%);color:#D6E5E2;font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;text-align:center}
+.c{max-width:340px;width:100%}
+h1{font-size:26px;font-weight:800;letter-spacing:-.02em;margin:18px 0 8px}
+p{font-size:15px;color:rgba(214,229,226,.65);line-height:1.45}
+.sp{width:46px;height:46px;margin:0 auto;border-radius:50%;border:3px solid rgba(255,45,58,.2);border-top-color:#FF2D3A;animation:r 1s linear infinite}
+@keyframes r{to{transform:rotate(360deg)}}
+a{display:flex;align-items:center;justify-content:center;height:56px;margin-top:22px;border-radius:18px;font-weight:700;font-size:16px;color:#fff;text-decoration:none;background:linear-gradient(180deg,#ff3a46,#c20d19);box-shadow:0 14px 34px -14px rgba(252,18,34,.9)}
+.err{color:#ff8a92}
+</style>
+</head>
+<body>
+<div class="c">
+  <div class="sp" id="sp"></div>
+  <h1 id="t">Открываем приложение…</h1>
+  <p id="s">Если ничего не произошло, нажми кнопку ниже</p>
+  <a id="go" href="#" hidden>Открыть приложение</a>
+</div>
+<script>
+// Переходник из Telegram во внешнее приложение. Пропускаем только схемы VPN-клиентов.
+(function(){
+  const to=new URLSearchParams(location.search).get('to')||'';
+  const ok=/^(happ|incy):\/\/(add|crypt\d)\/\S+$/i.test(to);
+  const go=document.getElementById('go');
+  if(!ok){
+    document.getElementById('sp').hidden=true;
+    document.getElementById('t').textContent='Ссылка не подходит';
+    document.getElementById('t').className='err';
+    document.getElementById('s').textContent='Вернись в Telegram и попробуй ещё раз.';
+    return;
+  }
+  go.href=to;go.hidden=false;
+  setTimeout(()=>{location.href=to;},150);
+})();
+</script>
+</body>
+</html>

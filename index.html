@@ -8,7 +8,9 @@
 <link rel="preload" href="fonts/forma-djr-cyrillic-text-2.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/forma-djr-cyrillic-text-4.woff2" as="font" type="font/woff2" crossorigin>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-<script src="globe.js"></script>
+<script src="land.js?v=4"></script>
+<script src="globe.js?v=4"></script>
+<script src="i18n.js?v=4"></script>
 <style>
 @font-face{font-family:'FDJ';src:url(fonts/forma-djr-cyrillic-text.woff2)format('woff2'),url(fonts/forma-djr-cyrillic-text.woff)format('woff');font-weight:400;font-display:swap}
 @font-face{font-family:'FDJ';src:url(fonts/forma-djr-cyrillic-text-2.woff2)format('woff2'),url(fonts/forma-djr-cyrillic-text-2.woff)format('woff');font-weight:500;font-display:swap}
@@ -284,21 +286,21 @@ button.tile,button.promo,button.rowi,button.qa,button.b1,button.b2,button.hdr2-m
 .hdr2-me:active{transform:scale(.96)}
 .hdr2-name{font-size:13px;font-weight:600;color:var(--txt);max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .hdr2-av{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:14px;color:#fff;background:linear-gradient(160deg,#ff4651,#b70c18);box-shadow:0 4px 14px -4px rgba(252,18,34,.8)}
-.hero{position:relative;height:310px;margin:0 -16px;touch-action:pan-y}
+.hero{position:relative;height:clamp(190px,calc(100vh - var(--app-top,0px) - 520px),300px);margin:0 -16px;touch-action:pan-y}
 .hero canvas{width:100%;height:100%;display:block;cursor:grab}
-.hero-hint{position:absolute;left:0;right:0;bottom:2px;text-align:center;font-size:11px;letter-spacing:.08em;color:rgba(214,229,226,.28);animation:hintOut 1s ease 5s forwards;pointer-events:none}
+.hero-hint{position:absolute;left:0;right:0;bottom:-2px;text-align:center;font-size:11px;letter-spacing:.08em;color:rgba(214,229,226,.28);animation:hintOut 1s ease 5s forwards;pointer-events:none}
 @keyframes hintOut{to{opacity:0}}
-.hs{position:relative;margin-top:12px}
+.hs{position:relative;margin-top:6px}
 .hs-pill{display:inline-flex;align-items:center;gap:8px;padding:7px 13px 7px 11px;border-radius:999px;font-size:12.5px;font-weight:600;background:rgba(252,18,34,.1);box-shadow:inset 0 0 0 1px rgba(252,18,34,.28);color:#ffd9dc}
 .hs-pill i{width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 0 0 rgba(255,45,58,.6);animation:pillPulse 2s var(--ez) infinite}
 .hs-pill.off{background:var(--glass);box-shadow:inset 0 0 0 1px var(--glass-b);color:rgba(214,229,226,.7)}
 .hs-pill.off i{background:#6b6f70;animation:none}
 @keyframes pillPulse{0%{box-shadow:0 0 0 0 rgba(255,45,58,.55)}70%{box-shadow:0 0 0 9px rgba(255,45,58,0)}100%{box-shadow:0 0 0 0 rgba(255,45,58,0)}}
-.hs-t{font-size:46px;line-height:1;font-weight:800;letter-spacing:-.03em;margin:16px 0 12px}
+.hs-t{font-size:42px;line-height:1;font-weight:800;letter-spacing:-.03em;margin:12px 0 10px}
 .hs-t em{font-style:normal;color:var(--red);text-shadow:0 0 34px rgba(255,45,58,.45)}
 .hs-s{font-size:15px;line-height:1.45;color:rgba(214,229,226,.6);margin:0}
 .hs-s b{color:var(--txt);font-weight:600}
-.hs-bar{height:6px;border-radius:999px;background:rgba(255,255,255,.07);margin:18px 0 20px;overflow:hidden}
+.hs-bar{height:6px;border-radius:999px;background:rgba(255,255,255,.07);margin:14px 0 16px;overflow:hidden}
 .hs-bar i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#b70c18,#ff4651);box-shadow:0 0 14px rgba(255,45,58,.7);transform-origin:left;animation:barIn 1.1s var(--ez) .2s both}
 @keyframes barIn{from{transform:scaleX(0)}}
 .b1{position:relative;overflow:hidden;width:100%;height:58px;border-radius:18px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:16.5px;font-weight:700;color:#fff;
@@ -539,6 +541,112 @@ button{font:inherit;color:inherit;border:0;background:none;-webkit-appearance:no
 .cr-done{text-align:center;padding:30px 10px}
 .cr-done-ic{width:84px;height:84px;margin:0 auto 18px;border-radius:28px;display:grid;place-items:center;font-size:40px;background:rgba(252,18,34,.12);box-shadow:inset 0 0 0 1px rgba(252,18,34,.35),0 24px 60px -24px rgba(252,18,34,1);animation:popIn .6s var(--ez)}
 @keyframes popIn{from{transform:scale(.6);opacity:0}}
+
+/* ===== v3: иконки, подарок ===== */
+.tcard-ic svg,.dhero .tcard-ic svg{width:24px;height:24px;color:var(--txt)}
+.tcard.hot .tcard-ic svg{color:var(--red)}
+.dhero .tcard-ic svg{width:28px;height:28px;color:var(--red)}
+.perk svg{width:18px;height:18px;color:var(--red);flex-shrink:0}
+.rowi-ic svg{width:17px;height:17px}
+.creator-k i{display:inline-flex}.creator-k svg{width:15px;height:15px}
+.cr-done-ic svg{width:38px;height:38px;color:var(--red)}
+.pay-opt-ico svg{width:22px;height:22px}
+.ghero{display:flex;gap:14px;align-items:center;padding:18px;border-radius:24px;background:radial-gradient(120% 120% at 0% 0%,rgba(252,18,34,.28),rgba(252,18,34,.03) 60%),var(--glass);box-shadow:inset 0 0 0 1px rgba(252,18,34,.3)}
+.ghero-ic{width:56px;height:56px;border-radius:18px;flex-shrink:0;display:grid;place-items:center;color:#fff;background:linear-gradient(160deg,#ff4651,#b70c18);box-shadow:0 12px 30px -10px rgba(252,18,34,.9)}
+.ghero-ic svg{width:28px;height:28px}
+.ghero-t{font-size:19px;font-weight:800;letter-spacing:-.01em}
+.ghero-s{font-size:13.5px;color:rgba(214,229,226,.65);line-height:1.4;margin-top:3px}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.seg-b{display:flex;flex-direction:column;align-items:center;gap:4px;padding:14px 6px 12px;border-radius:18px;background:var(--glass);box-shadow:inset 0 0 0 1px var(--glass-b);transition:transform .25s var(--ez),box-shadow .2s,background .2s}
+.seg-b svg{width:22px;height:22px;color:rgba(214,229,226,.7)}
+.seg-b span{font-size:14px;font-weight:700}
+.seg-b small{font-size:11.5px;color:rgba(214,229,226,.5)}
+.seg-b:active{transform:scale(.96)}
+.seg-b.on{background:rgba(252,18,34,.12);box-shadow:inset 0 0 0 1.5px rgba(255,45,58,.85)}
+.seg-b.on svg{color:var(--red)}
+.ginsuf{margin-top:12px;padding:14px 16px;border-radius:18px;background:rgba(252,18,34,.08);box-shadow:inset 0 0 0 1px rgba(252,18,34,.3);font-size:14px}
+.ginsuf b{color:var(--red)}
+
+/* ===== v3: подключение ===== */
+.oss{display:flex;gap:8px;overflow-x:auto;margin:0 -16px;padding:2px 16px 4px;scrollbar-width:none}
+.oss::-webkit-scrollbar{display:none}
+.os{flex-shrink:0;display:flex;align-items:center;gap:8px;height:44px;padding:0 14px;border-radius:14px;font-size:14px;font-weight:600;background:var(--glass);box-shadow:inset 0 0 0 1px var(--glass-b);transition:transform .2s var(--ez),background .2s,box-shadow .2s}
+.os svg{width:18px;height:18px}
+.os.on{background:rgba(252,18,34,.14);box-shadow:inset 0 0 0 1.5px rgba(255,45,58,.85)}
+.os:active{transform:scale(.95)}
+.appsel{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:4px;border-radius:18px;background:var(--glass);box-shadow:inset 0 0 0 1px var(--glass-b)}
+.appb{display:flex;flex-direction:column;align-items:center;gap:1px;padding:10px;border-radius:14px;transition:background .25s var(--ez)}
+.appb b{font-size:16px}.appb span{font-size:11.5px;color:rgba(214,229,226,.5)}
+.appb.on{background:linear-gradient(180deg,#ff3a46,#c20d19);box-shadow:0 10px 26px -12px rgba(252,18,34,.9)}
+.appb.on span{color:rgba(255,255,255,.8)}
+.cstep{display:flex;gap:14px;margin-top:12px;padding:16px;border-radius:22px;background:var(--glass);box-shadow:inset 0 0 0 1px var(--glass-b)}
+.cstep.dim .cstep-t,.cstep.dim .cstep-d{opacity:.6}
+.cstep-n{width:34px;height:34px;flex-shrink:0;border-radius:12px;display:grid;place-items:center;font-weight:800;color:var(--red);background:rgba(252,18,34,.12);box-shadow:inset 0 0 0 1px rgba(252,18,34,.3)}
+.cstep-n svg{width:18px;height:18px}
+.cstep-b{flex:1;min-width:0}
+.cstep-t{font-size:16.5px;font-weight:700}
+.cstep-d{font-size:13.5px;color:rgba(214,229,226,.6);line-height:1.45;margin-top:4px}
+.cbtns{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.cbtn{display:flex;align-items:center;gap:8px;height:44px;padding:0 14px;border-radius:14px;font-size:14px;font-weight:600;background:rgba(255,255,255,.07);box-shadow:inset 0 0 0 1px var(--glass-b);transition:transform .2s var(--ez)}
+.cbtn svg{width:17px;height:17px;color:var(--red)}
+.cbtn:active{transform:scale(.95)}
+.cstep .btn svg{width:19px;height:19px}
+.clink{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:8px;height:40px;font-size:13.5px;font-weight:600;color:rgba(214,229,226,.6)}
+.clink svg{width:15px;height:15px}
+
+/* ===== v3: устройства, админка ===== */
+[hidden]{display:none!important}
+.dvh{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px;border-radius:22px;background:var(--glass);box-shadow:inset 0 0 0 1px var(--glass-b)}
+.dvh-n{font-size:34px;font-weight:800;letter-spacing:-.02em;line-height:1}.dvh-n span{font-size:20px;color:rgba(214,229,226,.45)}
+.dvh-l{font-size:13px;color:rgba(214,229,226,.55);margin-top:4px}
+.dvh-dots{display:flex;flex-wrap:wrap;gap:5px;justify-content:flex-end;max-width:120px}
+.dvh-dots i{width:14px;height:20px;border-radius:5px;box-shadow:inset 0 0 0 1.5px rgba(214,229,226,.25)}
+.dvh-dots i.on{background:rgba(252,18,34,.2);box-shadow:inset 0 0 0 1.5px var(--red)}
+.dvwarn{margin-top:10px;padding:14px 16px;border-radius:18px;font-size:14px;line-height:1.45;background:rgba(252,18,34,.08);box-shadow:inset 0 0 0 1px rgba(252,18,34,.3)}
+.dvlist{margin:12px 0}
+.dv{display:flex;align-items:center;gap:12px;padding:14px;margin-bottom:8px;border-radius:20px;background:var(--glass);box-shadow:inset 0 0 0 1px var(--glass-b);transition:opacity .28s,transform .28s var(--ez)}
+.dv.out{opacity:0;transform:translateX(40px)}
+.dv-ic{width:44px;height:44px;flex-shrink:0;border-radius:14px;display:grid;place-items:center;background:rgba(255,255,255,.06)}
+.dv-ic svg{width:22px;height:22px}
+.dv-m{flex:1;min-width:0}.dv-t{font-size:15.5px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dv-s{font-size:13px;color:rgba(214,229,226,.6);margin-top:2px}.dv-d{font-size:12px;color:rgba(214,229,226,.4);margin-top:2px}
+.dv-x{width:42px;height:42px;flex-shrink:0;border-radius:14px;display:grid;place-items:center;color:#ff6b75;background:rgba(252,18,34,.1);box-shadow:inset 0 0 0 1px rgba(252,18,34,.3);transition:transform .2s var(--ez)}
+.dv-x svg{width:19px;height:19px}.dv-x:active{transform:scale(.9)}
+.btn svg{width:19px;height:19px}
+.empty{padding:26px 18px;text-align:center;border-radius:20px;background:var(--glass);box-shadow:inset 0 0 0 1px var(--glass-b);font-size:14px;color:rgba(214,229,226,.6);line-height:1.45}
+.empty b{display:block;font-size:17px;color:var(--txt);margin-bottom:6px}
+.skel{height:74px;margin-bottom:8px;border-radius:20px;background:linear-gradient(90deg,rgba(255,255,255,.04),rgba(255,255,255,.09),rgba(255,255,255,.04));background-size:200% 100%;animation:skel 1.2s linear infinite}
+@keyframes skel{to{background-position:-200% 0}}
+.sh-ico svg{width:16px;height:16px;color:var(--red)}
+.adhero{padding:18px;border-radius:24px;background:radial-gradient(120% 100% at 100% 0%,rgba(252,18,34,.3),rgba(252,18,34,.03) 60%),var(--glass);box-shadow:inset 0 0 0 1px rgba(252,18,34,.3)}
+.adhero-l{font-size:13px;color:#ffb3b8;font-weight:600}
+.adhero-v{font-size:36px;font-weight:800;letter-spacing:-.03em;margin:4px 0 2px}
+.adhero-s{font-size:13px;color:rgba(214,229,226,.6)}
+.bars{display:flex;align-items:flex-end;gap:3px;height:110px;margin-top:16px}
+.bars i{flex:1;min-width:2px;border-radius:4px 4px 2px 2px;background:linear-gradient(180deg,#ff4651,rgba(183,12,24,.55));transform-origin:bottom;animation:barUp .7s var(--ez) both}
+.bars i:nth-child(3n){animation-delay:.05s}.bars i:nth-child(3n+1){animation-delay:.1s}
+@keyframes barUp{from{transform:scaleY(0)}}
+.bars-x{display:flex;justify-content:space-between;font-size:11.5px;color:rgba(214,229,226,.4);margin-top:6px}
+.adwarn{display:flex;gap:12px;align-items:center;margin-top:10px;padding:14px 16px;border-radius:18px;font-size:13.5px;color:rgba(214,229,226,.75);background:rgba(255,176,32,.08);box-shadow:inset 0 0 0 1px rgba(255,176,32,.3)}
+.adwarn svg{width:22px;height:22px;color:#ffb020;flex-shrink:0}.adwarn b{display:block;color:#ffd27a;font-size:14.5px}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.kpi{padding:14px;border-radius:18px;background:var(--glass);box-shadow:inset 0 0 0 1px var(--glass-b);display:flex;flex-direction:column;gap:3px;min-width:0}
+.kpi span{font-size:12.5px;color:rgba(214,229,226,.55)}.kpi b{font-size:22px;font-weight:800;letter-spacing:-.02em}
+.kpi small{font-size:11.5px;color:rgba(214,229,226,.45);line-height:1.35}
+.tbar+.tbar{margin-top:14px}
+.tbar-h{display:flex;justify-content:space-between;font-size:14.5px;font-weight:600}
+.tbar-l{height:8px;border-radius:999px;background:rgba(255,255,255,.06);margin-top:8px;overflow:hidden}
+.tbar-l i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#b70c18,#ff4651);transform-origin:left;animation:barIn .9s var(--ez) both}
+.tbar-c{font-size:12px;color:rgba(214,229,226,.45);margin-top:5px}
+.rank{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;font-weight:800;font-size:13px;color:var(--red);background:rgba(252,18,34,.12)}
+.rrow b{font-size:15px;white-space:nowrap}
+.stt{font-size:11.5px;font-weight:700;padding:4px 9px;border-radius:999px;white-space:nowrap}
+.stt.ok{color:#5fd38d;background:rgba(95,211,141,.12)}.stt.pnd{color:#ffc24a;background:rgba(255,194,74,.12)}.stt.err{color:#ff6b75;background:rgba(252,18,34,.14)}
+
+/* ===== язык ===== */
+.hdr2-r{display:flex;align-items:center;gap:8px}
+.lang-b{height:40px;min-width:46px;padding:0 12px;border-radius:999px;font-size:13px;font-weight:800;letter-spacing:.04em;background:var(--glass);box-shadow:inset 0 0 0 1px var(--glass-b);transition:transform .2s var(--ez)}
+.lang-b:active{transform:scale(.92)}
 </style>
 </head>
 <body>
@@ -572,10 +680,13 @@ button{font:inherit;color:inherit;border:0;background:none;-webkit-appearance:no
   <div id="s-home" class="scr a">
     <div class="hdr2">
       <div class="hdr2-brand"><img src="img/logo.png" alt=""><span>Chameleon <em>VPN</em></span></div>
+      <div class="hdr2-r">
+      <button class="lang-b" onclick="haptic('light');I18N.toggle()" aria-label="Язык / Language">RU</button>
       <button class="hdr2-me" id="hdr-ava" onclick="openSheet()" aria-label="Профиль">
         <span class="hdr2-name" id="hdr-uid-name"></span>
         <span class="hdr2-av" id="hdr2-av">C</span>
       </button>
+      </div>
       <span id="hdr-uid" hidden><span id="hdr-uid-id"></span></span>
     </div>
     <div class="hero"><canvas id="hero-globe"></canvas><div class="hero-hint">потяни планету</div></div>
@@ -646,15 +757,15 @@ button{font:inherit;color:inherit;border:0;background:none;-webkit-appearance:no
     </div>
     <div class="otag" style="margin-bottom:10px">Выберите способ</div>
     <div class="pay-opt" id="pay-balance" onclick="selectPayMethod(this,'balance')">
-      <div class="pay-opt-ico">₽</div>
+      <div class="pay-opt-ico" data-ico="wallet"></div>
       <div><div class="pay-opt-t">Баланс</div><div class="pay-opt-d">Оплатить внутренним балансом</div></div>
     </div>
     <div class="pay-opt" id="pay-sbp" onclick="selectPayMethod(this,'sbp')">
-      <div class="pay-opt-ico">⚡</div>
+      <div class="pay-opt-ico" data-ico="sbp"></div>
       <div><div class="pay-opt-t">СБП</div><div class="pay-opt-d">Система быстрых платежей — мгновенно</div></div>
     </div>
     <div class="pay-opt" id="pay-card" onclick="selectPayMethod(this,'card')">
-      <div class="pay-opt-ico">💳</div>
+      <div class="pay-opt-ico" data-ico="card"></div>
       <div><div class="pay-opt-t">ЮKassa</div><div class="pay-opt-d">Банковская карта, СБП</div></div>
     </div>
     <button id="topup-pay-btn" class="btn btn-g" style="margin-top:10px" onclick="haptic('medium');doTopup()">Оплатить</button>
@@ -682,7 +793,7 @@ button{font:inherit;color:inherit;border:0;background:none;-webkit-appearance:no
     </div>
     <div class="otag">Для блогеров</div>
     <div class="creator">
-      <span class="creator-k">💸 Партнёрская программа</span>
+      <span class="creator-k"><i data-ico="money"></i>Партнёрская программа</span>
       <div class="creator-t">Зарабатывай на своём контенте</div>
       <div class="creator-s">Размести наш баннер или ссылку в ролике — платим деньгами, а не бонусами. Условия согласуем лично после проверки аккаунта.</div>
       <div class="creator-pl">
@@ -706,9 +817,9 @@ button{font:inherit;color:inherit;border:0;background:none;-webkit-appearance:no
     <div class="ptitle" style="font-size:28px">Chameleon <em>VPN</em></div>
     <div class="psub">Трафик маскируется под обычный — работает там, где другие VPN блокируют.</div>
     <div class="rows" style="margin-top:0">
-      <button class="rowi" onclick="showLegal('offer')"><span class="rowi-ic">📄</span>Пользовательское соглашение<i class="chev">›</i></button>
-      <button class="rowi" onclick="showLegal('policy')"><span class="rowi-ic">🔒</span>Политика конфиденциальности<i class="chev">›</i></button>
-      <button class="rowi" onclick="go('howto')"><span class="rowi-ic">⚡</span>Как подключить<i class="chev">›</i></button>
+      <button class="rowi" onclick="showLegal('offer')"><span class="rowi-ic" data-ico="doc"></span>Пользовательское соглашение<i class="chev">›</i></button>
+      <button class="rowi" onclick="showLegal('policy')"><span class="rowi-ic" data-ico="lock"></span>Политика конфиденциальности<i class="chev">›</i></button>
+      <button class="rowi" onclick="openConnect()"><span class="rowi-ic" data-ico="bolt"></span>Как подключить<i class="chev">›</i></button>
     </div>
     <div class="otag">Поддержка</div>
     <div class="card"><div class="psub" style="margin:0 0 14px">Есть вопрос или что-то не работает — напиши, ответим быстро.</div>
@@ -717,13 +828,17 @@ button{font:inherit;color:inherit;border:0;background:none;-webkit-appearance:no
 
   <div id="s-gift" class="scr">
     <div class="tb"><button class="bk" onclick="go('home')"></button><h2>Подарок</h2></div>
-    <div class="fl" style="margin-bottom:14px">
-      <div class="frow"><span class="frow-l">Ваш баланс</span><span class="frow-v hl" id="gft-balance-val">0 ₽</span></div>
+    <div class="ghero">
+      <div class="ghero-ic" data-ico="gift"></div>
+      <div><div class="ghero-t">Подари VPN другу</div><div class="ghero-s">Оплати с баланса — друг получит ссылку и активирует подписку в один клик</div></div>
     </div>
-    <div class="sec">Выберите тариф</div>
-    <div class="fl" id="gft-plans"></div>
-    <div id="gft-insuf" style="display:none;background:rgba(252,18,34,.06);border:1px solid rgba(252,18,34,.2);padding:14px;margin-top:10px"></div>
-    <button class="btn btn-g" id="gft-btn" onclick="createGift()" style="margin-top:10px">Создать подарок</button>
+    <div class="fl" style="margin:14px 0 0"><div class="frow"><span class="frow-l">Ваш баланс</span><span class="frow-v hl" id="gft-balance-val">0 ₽</span></div></div>
+    <div class="otag">Тариф</div>
+    <div class="seg" id="gft-tiers"></div>
+    <div class="otag">Срок</div>
+    <div class="durs" id="gft-plans"></div>
+    <div id="gft-insuf" class="ginsuf" style="display:none"></div>
+    <div class="paybar"><button class="btn btn-g" id="gft-btn" onclick="createGift()">Подарить</button></div>
   </div>
 
   <div id="s-gift-done" class="scr">
@@ -739,6 +854,16 @@ button{font:inherit;color:inherit;border:0;background:none;-webkit-appearance:no
     <button class="btn btn-d" onclick="shareGiftLink()">Поделиться в Telegram</button>
   </div>
 
+  <div id="s-devices" class="scr">
+    <div class="tb"><button class="bk" onclick="go('home')"></button><h2>Устройства</h2></div>
+    <div id="dv-body"></div>
+  </div>
+
+  <div id="s-admin" class="scr">
+    <div class="tb"><button class="bk" onclick="go('home')"></button><h2>Админ-панель</h2></div>
+    <div id="ad-body"></div>
+  </div>
+
   <div id="s-history" class="scr">
     <div class="tb"><button class="bk" onclick="go('home')"></button><h2>История</h2></div>
     <div id="hist-body"></div>
@@ -751,14 +876,7 @@ button{font:inherit;color:inherit;border:0;background:none;-webkit-appearance:no
 
   <div id="s-howto" class="scr">
     <div class="tb"><button class="bk" onclick="go('home')"></button><h2>Подключение</h2></div>
-    <div class="card">
-      <div class="step"><div class="step-n">1</div><div><div class="step-t">Скачай Happ Proxy Utility</div><div class="step-d">На iPhone и Mac нужна версия 5.1.0 или новее.</div></div></div>
-      <div class="step"><div class="step-n">2</div><div><div class="step-t">Купи подписку</div><div class="step-d">Выбери тариф и оплати прямо здесь.</div></div></div>
-      <div class="step"><div class="step-n">3</div><div><div class="step-t">Вставь ссылку</div><div class="step-d">Нажми + → «Из буфера обмена».</div></div></div>
-      <div class="step"><div class="step-n">4</div><div><div class="step-t">Подключись</div><div class="step-d">Выбери «Автоматический» или «🇵🇱 Польша» и нажми «Подключиться». n/a означает только, что не измерена задержка.</div></div></div>
-      <div class="step"><div class="step-n">!</div><div><div class="step-t">Если нет интернета</div><div class="step-d">Обнови Happ, удали старую группу и добавь ту же ссылку заново. Новая подписка не нужна.</div></div></div>
-    </div>
-    <button class="btn btn-g" onclick="go('plans')" style="margin-top:4px">Купить подписку →</button>
+    <div id="cn-body"></div>
   </div>
 
 
@@ -792,6 +910,12 @@ button{font:inherit;color:inherit;border:0;background:none;-webkit-appearance:no
       <div class="sh-bal-num" id="sh-balance">0 ₽</div>
     </div>
     <button class="btn btn-g" style="width:auto;margin:0;padding:10px 20px;font-size:11px" onclick="closeSheet();loadTopup()">+ Пополнить</button>
+  </div>
+  <div class="sh-item sh-admin" id="sh-admin" onclick="closeSheet();loadAdmin()" hidden>
+    <div class="sh-ico" data-ico="chart"></div><div class="sh-lbl">Админ-панель</div><div class="sh-arr">›</div>
+  </div>
+  <div class="sh-item" onclick="closeSheet();loadDevices()">
+    <div class="sh-ico" data-ico="phone"></div><div class="sh-lbl">Устройства</div><div class="sh-arr">›</div>
   </div>
   <div class="sh-item" onclick="closeSheet();loadTopup()">
     <div class="sh-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="1"/><path d="M2 10h20"/><path d="M6 15h4"/></svg></div>
@@ -845,6 +969,41 @@ let _authUser=TGU?{first_name:TGU.first_name,username:TGU.username||''}:null;
 const _skipAuth=new URLSearchParams(location.search).has('demo');
 let _apiToken=sessionStorage.getItem('chameleon_session')||'';
 if(!TGU&&_apiToken){try{const p=JSON.parse(atob(_apiToken.split('.')[0].replace(/-/g,'+').replace(/_/g,'/')));if(p.exp*1000>Date.now())TGU={id:p.sub,first_name:'',username:''};else{sessionStorage.removeItem('chameleon_session');_apiToken='';}}catch(e){sessionStorage.removeItem('chameleon_session');_apiToken='';}}
+// ===== иконки (вместо эмодзи) =====
+const _sv=(d,w=1.9)=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+const ICO={
+  bolt:_sv('<path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/>'),
+  users:_sv('<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5"/><circle cx="17" cy="9" r="2.6"/><path d="M16 14.6c2.8.2 5 2.2 5 5.4"/>'),
+  rocket:_sv('<path d="M5 15c-1.5 1.3-2 4-2 6 2 0 4.7-.5 6-2"/><path d="M9 15 15 9"/><path d="M14.5 3.5C18 3 21 3 21 3s0 3-.5 6.5c-.6 4-5 8.5-9.5 10L6.5 15C8 10.5 10.5 4 14.5 3.5Z"/><circle cx="15.5" cy="8.5" r="1.6"/>'),
+  inf:_sv('<path d="M7 8.5C4.5 8.5 3 10.2 3 12s1.5 3.5 4 3.5c3.5 0 6.5-7 10-7 2.5 0 4 1.7 4 3.5s-1.5 3.5-4 3.5c-3.5 0-6.5-7-10-7Z"/>'),
+  phone:_sv('<rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M11 18h2"/>'),
+  speed:_sv('<path d="M12 14 16 9"/><path d="M3.5 17a9 9 0 1 1 17 0"/><circle cx="12" cy="14" r="1.4"/>'),
+  lock:_sv('<rect x="4.5" y="10.5" width="15" height="10.5" rx="3"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/>'),
+  doc:_sv('<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/>'),
+  shield:_sv('<path d="M12 3 4.5 6v6c0 4.6 3.2 8.2 7.5 9 4.3-.8 7.5-4.4 7.5-9V6Z"/><path d="m9 12 2 2 4-4"/>'),
+  gift:_sv('<path d="M20 12v9H4v-9"/><path d="M2.5 7.5h19v4.5h-19z"/><path d="M12 21V7.5"/><path d="M12 7.5H8a2.5 2.5 0 1 1 0-5c2.8 0 4 5 4 5Z"/><path d="M12 7.5h4a2.5 2.5 0 1 0 0-5c-2.8 0-4 5-4 5Z"/>'),
+  money:_sv('<rect x="2.5" y="6" width="19" height="12" rx="3"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v5M18 9.5v5"/>'),
+  card:_sv('<rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M2.5 10h19M6.5 15h4"/>'),
+  sbp:_sv('<path d="m4 6 5 3v6l-5 3Z"/><path d="m9 9 11-4-6 7"/><path d="m9 15 11 4-6-7"/>'),
+  wallet:_sv('<path d="M19 7V5.5A1.5 1.5 0 0 0 17.5 4H5a2 2 0 0 0 0 4h14a1 1 0 0 1 1 1v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6"/><circle cx="16.5" cy="13.5" r="1.3"/>'),
+  send:_sv('<path d="M21 3 10 14"/><path d="M21 3 14.5 21 10 14 3 9.5Z"/>'),
+  check:_sv('<path d="m5 12.5 4.5 4.5L19 7.5"/>',2.4),
+  apple:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9-1.7 0-3.3 1-4.2 2.6-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.4-.8 1.5 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9-.1 0-2.8-1.1-2.8-4.1ZM13.9 4.9c.7-.9 1.2-2 1-3.2-1 .1-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.1 1.2.1 2.3-.6 3.1-1.5Z"/></svg>',
+  android:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 9.4 19.2 6.5a.4.4 0 0 0-.7-.4l-1.7 3A10.2 10.2 0 0 0 12 8a10.2 10.2 0 0 0-4.8 1.1l-1.7-3a.4.4 0 0 0-.7.4l1.7 2.9A8.8 8.8 0 0 0 2 16.5h20a8.8 8.8 0 0 0-4.5-7.1ZM7.3 13.8a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm9.4 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>',
+  windows:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.4 10.4 4.4v7H3Zm8.4-1.1L21 3v8.4h-9.6ZM3 12.6h7.4v7L3 18.6Zm8.4 0H21V21l-9.6-1.3Z"/></svg>',
+  mac:_sv('<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>'),
+  tv:_sv('<rect x="2.5" y="5" width="19" height="12.5" rx="2"/><path d="m8 21 4-3.5 4 3.5"/>'),
+  qr:_sv('<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 14h3v3h-3zM20 14v.01M20 20h-6v-3M20 17v3"/>'),
+  copy:_sv('<rect x="9" y="9" width="12" height="12" rx="3"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>'),
+  trash:_sv('<path d="M4 7h16M10 11v6M14 11v6M5.5 7l1 12a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2l1-12M9 7V4.5A1.5 1.5 0 0 1 10.5 3h3A1.5 1.5 0 0 1 15 4.5V7"/>'),
+  download:_sv('<path d="M12 3v12M7 10l5 5 5-5M4 20h16"/>'),
+  plus:_sv('<path d="M12 5v14M5 12h14"/>',2.2),
+  power:_sv('<path d="M12 3v8"/><path d="M6.4 6.6a8 8 0 1 0 11.2 0"/>'),
+  chart:_sv('<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>'),
+  globe:_sv('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/>'),
+  sparkle:_sv('<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/>'),
+};
+const tierIcon=id=>({basic:ICO.bolt,family:ICO.users,pro:ICO.rocket}[id]||ICO.shield);
 // Все API-запросы идут через apiFetch — автоматически добавляет X-Tg-Init-Data
 async function apiFetch(url,opts={}){
   const h={...(opts.headers||{})};
@@ -866,26 +1025,26 @@ async function apiFetch(url,opts={}){
 function operationKey(){return crypto.randomUUID?.()||`${Date.now()}-${Math.random().toString(36).slice(2)}`;}
 // splash always shows — login/app shown after animation (see bottom of script)
 let TIERS=[
-  {id:'basic',  name:'Базовый',     emoji:'⚡',  devices:3, gb:0,  fromPrice:129,
+  {id:'basic', name:'Базовый', emoji:'⚡', devices:3, gb:0, fromPrice:249,
    durations:[
-     {id:'basic_1m',  label:'1 месяц',    days:30,  price:129,  full:193,  disc:33},
-     {id:'basic_3m',  label:'3 месяца',   days:90,  price:387,  full:624,  disc:38},
-     {id:'basic_6m',  label:'6 месяцев',  days:180, price:774,  full:1613, disc:52},
-     {id:'basic_12m', label:'12 месяцев', days:365, price:1548, full:3969, disc:61},
+     {id:'basic_1m', label:'1 месяц', days:30, price:249, full:249, disc:0},
+     {id:'basic_3m', label:'3 месяца', days:90, price:649, full:747, disc:13},
+     {id:'basic_6m', label:'6 месяцев', days:180, price:1149, full:1494, disc:23},
+     {id:'basic_12m', label:'12 месяцев', days:365, price:1890, full:2988, disc:37},
    ]},
-  {id:'family', name:'Семейный',    emoji:'👨‍👩‍👧‍👦', devices:6, gb:0, fromPrice:329,
+  {id:'family', name:'Семейный', emoji:'👨‍👩‍👧‍👦', devices:6, gb:0, fromPrice:349,
    durations:[
-     {id:'family_1m',  label:'1 месяц',    days:30,  price:329,  full:491,  disc:33},
-     {id:'family_3m',  label:'3 месяца',   days:90,  price:913,  full:1473, disc:38},
-     {id:'family_6m',  label:'6 месяцев',  days:180, price:1414, full:2946, disc:52},
-     {id:'family_12m', label:'12 месяцев', days:365, price:2298, full:5892, disc:61},
+     {id:'family_1m', label:'1 месяц', days:30, price:349, full:349, disc:0},
+     {id:'family_3m', label:'3 месяца', days:90, price:899, full:1047, disc:14},
+     {id:'family_6m', label:'6 месяцев', days:180, price:1590, full:2094, disc:24},
+     {id:'family_12m', label:'12 месяцев', days:365, price:2590, full:4188, disc:38},
    ]},
-  {id:'pro',    name:'Расширенный', emoji:'🚀', devices:9, gb:0, fromPrice:429,
+  {id:'pro', name:'Расширенный', emoji:'🚀', devices:9, gb:0, fromPrice:449,
    durations:[
-     {id:'pro_1m',  label:'1 месяц',    days:30,  price:429,  full:499,  disc:14},
-     {id:'pro_3m',  label:'3 месяца',   days:90,  price:1108, full:1497, disc:26},
-     {id:'pro_6m',  label:'6 месяцев',  days:180, price:2006, full:2994, disc:33},
-     {id:'pro_12m', label:'12 месяцев', days:365, price:3533, full:5988, disc:41},
+     {id:'pro_1m', label:'1 месяц', days:30, price:449, full:449, disc:0},
+     {id:'pro_3m', label:'3 месяца', days:90, price:1149, full:1347, disc:15},
+     {id:'pro_6m', label:'6 месяцев', days:180, price:1990, full:2694, disc:26},
+     {id:'pro_12m', label:'12 месяцев', days:365, price:3290, full:5388, disc:39},
    ]},
 ];
 let PLANS=TIERS.flatMap(t=>t.durations.map(d=>({...d,tierName:t.name,emoji:t.emoji,devices:t.devices,gb:t.gb})));
@@ -909,17 +1068,19 @@ function go(id){
   const _nb=_nm[id];if(_nb)document.getElementById(_nb)?.classList.add('on');
   if(window._hero){id==='home'&&!document.getElementById('splash')?_hero.start():_hero.stop();}
 }
+// цена за месяц: округление как в прайсе (191,5 → 191; 299,7 → 300)
+function perMonth(d){const m=Math.max(1,Math.round(d.days/30));return Math.round(d.price/m-0.01);}
 function renderPlans(){
   const box=document.getElementById('plans-list');if(!box)return;
   box.innerHTML=`<div class="ptitle">Выбери<br><em>свой тариф.</em></div>
     <div class="psub">Безлимитный трафик и все страны на любом тарифе</div>`+
   TIERS.map((t,i)=>{
     const maxDisc=Math.max(...t.durations.map(d=>d.disc||0));
-    const best=t.durations.reduce((a,d)=>Math.min(a,Math.round(d.price/Math.max(1,Math.round(d.days/30)))),1e9);
+    const best=t.durations.reduce((a,d)=>Math.min(a,perMonth(d)),1e9);
     const dev=Array.from({length:9},(_,k)=>`<i class="${k<t.devices?'on':''}"></i>`).join('');
     return`<button class="tcard${i===1?' hot':''}" onclick="haptic('light');openPlan('${t.id}')">
       <div class="tcard-top">
-        <div class="tcard-ic">${t.emoji}</div>
+        <div class="tcard-ic">${tierIcon(t.id)}</div>
         <div><div class="tcard-n">${esc(t.name)}</div><div class="tcard-d">до ${t.devices} устройств · ${t.gb?t.gb+' ГБ/мес':'безлимит'}</div></div>
         ${i===1?'<span class="tcard-tag">Популярный</span>':maxDisc?`<span class="badge" style="margin:0 0 0 auto;align-self:flex-start">до −${maxDisc}%</span>`:''}
       </div>
@@ -938,15 +1099,15 @@ function openPlan(tierId){
   const bestId=t.durations.reduce((a,d)=>(!a||d.disc>a.disc)?d:a,null)?.id;
   document.getElementById('plan-body').innerHTML=`
     <div class="dhero">
-      <div class="tcard-ic">${t.emoji}</div>
+      <div class="tcard-ic">${tierIcon(t.id)}</div>
       <div class="ptitle" style="margin:0">${esc(t.name)}</div>
       <div class="psub" style="margin:6px 0 0">до ${t.devices} устройств одновременно</div>
     </div>
     <div class="perks">
-      <div class="perk"><b>∞</b>${gb}</div>
-      <div class="perk"><b>${t.devices}</b>устройств</div>
-      <div class="perk"><b>⚡</b>Без ограничения скорости</div>
-      <div class="perk"><b>🔒</b>VLESS + TLS</div>
+      <div class="perk">${ICO.inf}${gb}</div>
+      <div class="perk">${ICO.phone}${t.devices} устройств</div>
+      <div class="perk">${ICO.speed}Полная скорость</div>
+      <div class="perk">${ICO.lock}VLESS + TLS</div>
     </div>
     <div class="otag">Срок подписки</div>
     <div class="durs" id="dur-list">${t.durations.map(d=>{
@@ -956,7 +1117,7 @@ function openPlan(tierId){
         ${d.disc?`<span class="dur-chip">−${d.disc}%</span>`:''}
         <span class="dur-label">${d.label}</span>
         <span class="dur-price">${d.price} ₽</span>
-        <span class="dur-pm">${m>1?`${Math.round(d.price/m)} ₽/мес`:'&nbsp;'}${d.disc?` · <s class="dur-old">${d.full} ₽</s>`:''}</span>
+        <span class="dur-pm">${m>1?`${perMonth(d)} ₽/мес`:'&nbsp;'}${d.disc?` · <s class="dur-old">${d.full} ₽</s>`:''}</span>
       </button>`;}).join('')}
     </div>
     <div class="paybar"><button class="btn btn-g off" id="dur-pay-btn" onclick="buy()">Выберите срок</button></div>`;
@@ -1004,7 +1165,7 @@ function renderHomeStatus(){
       <h1 class="hs-t">VPN<br><em>отключён.</em></h1>
       <p class="hs-s">Подключи защиту за минуту — трафик выглядит как обычный, до 9 устройств.</p>
       <button class="b1" onclick="haptic('medium');go('plans')">Выбрать тариф</button>
-      <button class="b2" onclick="go('howto')">Как это работает</button>
+      <button class="b2" onclick="openConnect()">Как подключить</button>
     </div>`;
   }else{
     const s=_sub,total=s.total_days||30,pct=Math.max(3,Math.min(100,Math.round((s.days_left/total)*100)));
@@ -1015,10 +1176,10 @@ function renderHomeStatus(){
       <h1 class="hs-t">${soon?'Осталось<br>':'Вы под<br>'}<em>${soon?`${s.days_left} ${dw(s.days_left)}.`:'защитой.'}</em></h1>
       <p class="hs-s">Тариф «${esc(s.plan_name||'—')}» · <b>${s.days_left} ${dw(s.days_left)}</b> · до ${esc(s.expires||'—')}</p>
       <div class="hs-bar"><i style="width:${pct}%"></i></div>
-      <button class="b1" onclick="haptic('medium');go('howto')">${ic.bolt}Подключить устройство</button>
+      <button class="b1" onclick="haptic('medium');openConnect()">${ic.bolt}Подключить устройство</button>
       <div class="qa3">
         <button class="qa" onclick="haptic('light');copyConf()">${ic.copy}<span>Ключ</span></button>
-        <button class="qa" onclick="haptic('light');loadAcc()">${ic.dev}<span>Устройства</span></button>
+        <button class="qa" onclick="haptic('light');loadDevices()">${ic.dev}<span>Устройства</span></button>
         <button class="qa ${soon?'hot':''}" onclick="haptic('light');go('plans')">${ic.renew}<span>Продлить</span></button>
       </div>
     </div>`;
@@ -1026,6 +1187,191 @@ function renderHomeStatus(){
   const balEl=document.getElementById('home-bal-val');
   if(balEl) balEl.textContent=_balance+' ₽';
 }
+
+
+// ===== устройства =====
+let _dv={limit:0,devices:[]};
+function devIcon(p){p=(p||'').toLowerCase();return p.includes('android tv')||p==='tv'?ICO.tv:p.includes('mac')?ICO.mac:p.includes('win')?ICO.windows:ICO.phone;}
+async function loadDevices(){
+  go('devices');
+  const b=document.getElementById('dv-body');
+  if(_DEMO){
+    _dv={limit:6,devices:[
+      {hwid:'d1',title:'iPhone 17 Pro',os:'iOS 26.3',app:'Happ 5.1.0',platform:'iOS',added:'05.11.2026'},
+      {hwid:'d2',title:'Mac',os:'macOS 26.5.1',app:'INCY 2.4',platform:'macOS',added:'16.11.2026'},
+      {hwid:'d3',title:'iPad Pro 12.9',os:'iPadOS 26.5',app:'Happ 5.1.0',platform:'iOS',added:'21.11.2026'},
+      {hwid:'d4',title:'Samsung Galaxy S25',os:'Android 16',app:'Happ 3.2',platform:'Android',added:'20.11.2026'}]};
+    renderDevices();return;
+  }
+  b.innerHTML='<div class="skel"></div><div class="skel"></div>';
+  try{
+    const d=await (await apiFetch('/api/devices')).json();
+    if(!d.ok){b.innerHTML=`<div class="empty">${esc(d.error||'Ошибка загрузки')}</div>`;return;}
+    if(d.no_sub){b.innerHTML=`<div class="empty"><b>Нет активной подписки</b>Оформи тариф — и здесь появятся твои устройства.<button class="btn btn-g" style="margin-top:16px" onclick="go('plans')">Выбрать тариф</button></div>`;return;}
+    _dv=d;renderDevices();
+  }catch(e){b.innerHTML='<div class="empty">Ошибка соединения</div>';}
+}
+function renderDevices(){
+  const {limit,devices}=_dv,n=devices.length,full=limit&&n>=limit;
+  document.getElementById('dv-body').innerHTML=`
+    <div class="dvh">
+      <div><div class="dvh-n">${n}<span> / ${limit||'—'}</span></div><div class="dvh-l">устройств подключено</div></div>
+      <div class="dvh-dots">${Array.from({length:Math.max(limit,n)},(_,i)=>`<i class="${i<n?'on':''}"></i>`).join('')}</div>
+    </div>
+    ${full?`<div class="dvwarn">Лимит устройств исчерпан. Удали ненужное устройство или перейди на тариф с большим лимитом.<button class="btn btn-d" style="margin:10px 0 0;height:46px" onclick="go('plans')">Тарифы</button></div>`:''}
+    <div class="dvlist">${n?devices.map(d=>`
+      <div class="dv" id="dv-${esc(d.hwid)}">
+        <div class="dv-ic">${devIcon(d.platform)}</div>
+        <div class="dv-m"><div class="dv-t">${esc(d.title)}</div><div class="dv-s">${esc([d.os,d.app].filter(Boolean).join(' · '))}</div>${d.added?`<div class="dv-d">добавлено ${esc(d.added)}</div>`:''}</div>
+        <button class="dv-x" aria-label="Удалить" onclick="delDevice('${esc(d.hwid)}')">${ICO.trash}</button>
+      </div>`).join(''):'<div class="empty"><b>Пока пусто</b>Устройство появится здесь после первого подключения.</div>'}
+    </div>
+    <button class="btn btn-g" onclick="openConnect()">${ICO.plus}Подключить новое устройство</button>`;
+}
+function delDevice(hwid){
+  const d=_dv.devices.find(x=>x.hwid===hwid);if(!d)return;
+  const run=async ok=>{
+    if(!ok)return;haptic('medium');
+    const el=document.getElementById('dv-'+hwid);el?.classList.add('out');
+    if(_DEMO){setTimeout(()=>{_dv.devices=_dv.devices.filter(x=>x.hwid!==hwid);renderDevices();toast('Устройство удалено');},280);return;}
+    try{
+      const r=await (await apiFetch('/api/devices/delete',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({hwid})})).json();
+      if(r.ok){_dv=r;renderDevices();toast('Устройство удалено');}else{el?.classList.remove('out');toast(r.error||'Ошибка');}
+    }catch(e){el?.classList.remove('out');toast('Ошибка соединения');}
+  };
+  const q=`Удалить «${d.title}»? Оно отключится от VPN, место освободится для нового устройства.`;
+  const qq=window.I18N?I18N.T(q):q;if(tg?.showConfirm&&tg.isVersionAtLeast?.('6.2'))tg.showConfirm(qq,run);else run(confirm(qq));
+}
+
+// ===== админ-панель =====
+let _isAdmin=false,_adDays=30;
+function setAdmin(v){_isAdmin=!!v||_DEMO;const e=document.getElementById('sh-admin');if(e)e.hidden=!_isAdmin;}
+const fmtR=n=>(Number(n)||0).toLocaleString('ru-RU')+' ₽';
+function demoStats(days){
+  const series=Array.from({length:days},(_,i)=>{const d=new Date(Date.now()-(days-1-i)*864e5);const base=1800+i*55+Math.sin(i/2.3)*700+(i%7>4?900:0);
+    return{date:d.toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit'}),rub:Math.max(0,Math.round(base/10)*10)};});
+  const sum=series.reduce((a,x)=>a+x.rub,0);
+  return{period_days:days,revenue:{today:series.at(-1).rub,d7:series.slice(-7).reduce((a,x)=>a+x.rub,0),d30:sum,all:sum*3+41870,avg_check:612,payments_period:Math.round(sum/612),balance_purchases_rub:8940},
+    series,users:{total:1284,new_period:312,new_24h:17,active_subs:402,expiring_7d:38,trial:796,paying:451,conversion:35.1},
+    tiers:[{name:'Базовый',count:198,rub:71320},{name:'Семейный',count:121,rub:58410},{name:'Расширенный',count:47,rub:31870}],
+    plans:[{label:'Базовый · 1 месяц',count:142,rub:35358},{label:'Семейный · 1 месяц',count:77,rub:26873},{label:'Базовый · 12 месяцев',count:12,rub:22680},{label:'Расширенный · 3 месяца',count:15,rub:17235},{label:'Семейный · 6 месяцев',count:9,rub:14310}],
+    methods:[{method:'ЮKassa',count:201,rub:98400},{method:'СБП',count:118,rub:55230},{method:'Баланс',count:47,rub:8940}],
+    referrals:{referred_users:214,bonus_rub:23410},liabilities:{balances_rub:18350},attention:{pending:3,provisioning_failed:1},gifts:{created:26,redeemed:19},
+    recent:[{date:'22.11 14:52',user:'@alex_k',plan:'Семейный · 1 месяц',rub:349,method:'СБП',status:'fulfilled'},{date:'22.11 13:10',user:'@maria_s',plan:'Пополнение баланса',rub:500,method:'ЮKassa',status:'paid'},
+      {date:'22.11 11:47',user:'Дмитрий',plan:'Базовый · 3 месяца',rub:649,method:'ЮKassa',status:'fulfilled'},{date:'22.11 09:03',user:'@ivan',plan:'Расширенный · 1 месяц',rub:449,method:'ЮKassa',status:'pending'},
+      {date:'21.11 23:31',user:'@kate',plan:'Базовый · 1 месяц',rub:249,method:'Баланс',status:'fulfilled'},{date:'21.11 21:18',user:'@petr',plan:'Семейный · 12 месяцев',rub:2590,method:'СБП',status:'provisioning_failed'}]};
+}
+async function loadAdmin(days){
+  if(days)_adDays=days;
+  go('admin');
+  const b=document.getElementById('ad-body');
+  if(_DEMO){renderAdmin(demoStats(_adDays));return;}
+  b.innerHTML='<div class="skel"></div><div class="skel"></div><div class="skel"></div>';
+  try{
+    const r=await apiFetch('/api/admin/stats?days='+_adDays);
+    const d=await r.json();
+    if(!d.ok){b.innerHTML=`<div class="empty">${r.status===403?'Нет доступа':esc(d.error||'Ошибка')}</div>`;return;}
+    renderAdmin(d);
+  }catch(e){b.innerHTML='<div class="empty">Ошибка соединения</div>';}
+}
+function renderAdmin(d){
+  const R=d.revenue,U=d.users,max=Math.max(1,...d.series.map(x=>x.rub)),tmax=Math.max(1,...d.tiers.map(t=>t.rub));
+  const st={fulfilled:['Выдано','ok'],paid:['Оплачено','ok'],succeeded:['Оплачено','ok'],pending:['Ожидание','pnd'],failed:['Отказ','err'],provisioning_failed:['Сбой выдачи','err']};
+  const att=d.attention.pending+d.attention.provisioning_failed;
+  document.getElementById('ad-body').innerHTML=`
+    <div class="chips" style="margin-bottom:14px">${[7,30,90].map(n=>`<button class="chip${n===d.period_days?' on':''}" onclick="loadAdmin(${n})">${n} дней</button>`).join('')}</div>
+    <div class="adhero">
+      <div class="adhero-l">Выручка за ${d.period_days} дн.</div>
+      <div class="adhero-v">${fmtR(d.period_days===7?R.d7:d.series.reduce((a,x)=>a+x.rub,0))}</div>
+      <div class="adhero-s">сегодня ${fmtR(R.today)} · за всё время ${fmtR(R.all)}</div>
+      <div class="bars">${d.series.map(x=>`<i style="height:${Math.max(3,Math.round(x.rub/max*100))}%" title="${x.date}: ${fmtR(x.rub)}"></i>`).join('')}</div>
+      <div class="bars-x"><span>${d.series[0]?.date||''}</span><span>${d.series.at(-1)?.date||''}</span></div>
+    </div>
+    ${att?`<div class="adwarn">${ICO.sparkle}<div><b>Требует внимания</b>${d.attention.provisioning_failed?`${d.attention.provisioning_failed} оплачено, но доступ не выдан · `:''}${d.attention.pending} ждут оплаты</div></div>`:''}
+    <div class="kpis">
+      <div class="kpi"><span>Средний чек</span><b>${fmtR(R.avg_check)}</b></div>
+      <div class="kpi"><span>Платежей</span><b>${R.payments_period}</b></div>
+      <div class="kpi"><span>Активных подписок</span><b>${U.active_subs}</b></div>
+      <div class="kpi"><span>Истекают за 7 дней</span><b>${U.expiring_7d}</b></div>
+      <div class="kpi"><span>Пользователей</span><b>${U.total}</b><small>+${U.new_period} за период · +${U.new_24h} за сутки</small></div>
+      <div class="kpi"><span>Платящих</span><b>${U.paying}</b><small>конверсия ${U.conversion}% · пробник у ${U.trial}</small></div>
+    </div>
+    <div class="otag">По тарифам</div>
+    <div class="card">${d.tiers.map(t=>`<div class="tbar"><div class="tbar-h"><span>${esc(t.name)}</span><b>${fmtR(t.rub)}</b></div><div class="tbar-l"><i style="width:${Math.round(t.rub/tmax*100)}%"></i></div><div class="tbar-c">${t.count} покупок</div></div>`).join('')}</div>
+    <div class="otag">Популярные покупки</div>
+    <div class="rlist">${d.plans.slice(0,6).map((p,i)=>`<div class="rrow"><div class="rank">${i+1}</div><div style="flex:1"><div class="rrow-n">${esc(p.label)}</div><div class="rrow-d">${p.count} шт.</div></div><b>${fmtR(p.rub)}</b></div>`).join('')||'<div class="rrow"><div class="rrow-d">Покупок пока нет</div></div>'}</div>
+    <div class="otag">Способы оплаты</div>
+    <div class="rlist">${d.methods.map(m=>`<div class="rrow"><div style="flex:1"><div class="rrow-n">${esc(m.method)}</div><div class="rrow-d">${m.count} операций${m.method==='Баланс'?' · не выручка':''}</div></div><b>${fmtR(m.rub)}</b></div>`).join('')}</div>
+    <div class="kpis" style="margin-top:10px">
+      <div class="kpi"><span>Приведено рефералами</span><b>${d.referrals.referred_users}</b><small>начислено бонусов ${fmtR(d.referrals.bonus_rub)}</small></div>
+      <div class="kpi"><span>Остатки на балансах</span><b>${fmtR(d.liabilities.balances_rub)}</b><small>обязательства перед клиентами</small></div>
+      <div class="kpi"><span>Подарки</span><b>${d.gifts.created}</b><small>активировано ${d.gifts.redeemed}</small></div>
+      <div class="kpi"><span>Покупки с баланса</span><b>${fmtR(R.balance_purchases_rub)}</b><small>за период, не выручка</small></div>
+    </div>
+    <div class="otag">Последние операции</div>
+    <div class="rlist">${d.recent.map(p=>{const s=st[p.status]||[p.status,''];return`<div class="rrow"><div style="flex:1;min-width:0"><div class="rrow-n">${esc(p.user)} · ${fmtR(p.rub)}</div><div class="rrow-d">${esc(p.plan)} · ${esc(p.method)} · ${esc(p.date)}</div></div><span class="stt ${s[1]}">${s[0]}</span></div>`;}).join('')}</div>
+    ${_DEMO?'<div class="psub" style="margin-top:14px;text-align:center">Демо-данные. На сервере здесь будут реальные цифры из базы бота.</div>':''}`;
+}
+
+// ===== подключение: ОС → приложение → 3 шага =====
+const APPS={
+  ios:{incy:[['App Store','https://apps.apple.com/app/incy/id6756943388']],happ:[['App Store','https://apps.apple.com/us/app/happ-proxy-utility/id6504287215']]},
+  android:{incy:[['Google Play','https://play.google.com/store/apps/details?id=llc.itdev.incy'],['Скачать APK','https://github.com/INCY-DEV/incy-platforms/releases/latest/download/Incy.apk']],
+           happ:[['Google Play','https://play.google.com/store/apps/details?id=com.happproxy'],['Скачать APK','https://github.com/Happ-proxy/happ-android/releases/latest/download/Happ.apk']]},
+  windows:{incy:[['Установщик Windows','https://github.com/INCY-DEV/incy-platforms/releases/latest/download/incy-windows-setup.exe']],
+           happ:[['Установщик Windows','https://github.com/Happ-proxy/happ-desktop/releases/latest/download/setup-Happ.x64.exe']]},
+  macos:{incy:[['Apple Silicon (M1–M4)','https://github.com/INCY-DEV/incy-platforms/releases/latest/download/incy-macos-arm64.dmg'],['Mac на Intel','https://github.com/INCY-DEV/incy-platforms/releases/latest/download/incy-macos-intel.dmg']],
+         happ:[['App Store','https://apps.apple.com/us/app/happ-proxy-utility/id6504287215'],['Скачать .dmg','https://github.com/Happ-proxy/happ-desktop/releases/latest/download/Happ.macOS.universal.dmg']]},
+  tv:{happ:[['Google Play','https://play.google.com/store/apps/details?id=com.happproxy'],['Инструкция для TV','https://docs.happ.info/main/ru/faq/android-tv']]}
+};
+const OSES=[['ios','iPhone','apple'],['android','Android','android'],['windows','Windows','windows'],['macos','macOS','mac'],['tv','Android TV','tv']];
+let _cnOs='',_cnApp='incy';
+function detectOs(){
+  const p=(tg?.platform||'').toLowerCase(),ua=navigator.userAgent;
+  if(p==='ios'||/iPhone|iPad|iPod/.test(ua))return'ios';
+  if(p==='android'||/Android/.test(ua))return'android';
+  if(p==='macos'||/Macintosh/.test(ua))return'macos';
+  if(/Windows/.test(ua)||p==='tdesktop')return'windows';
+  return'ios';
+}
+function openExt(url){haptic('light');if(tg?.openLink)tg.openLink(url);else window.open(url,'_blank');}
+function addSubscription(){
+  const u=_sub?.config_url;
+  if(!u){toast('Сначала оформи подписку');go('plans');return;}
+  const deep=`${_cnApp}://add/${u}`;
+  haptic('medium');
+  const bridge=new URL('open.html?to='+encodeURIComponent(deep),location.href).href;
+  if(tg?.openLink)tg.openLink(bridge);else location.href=deep;
+}
+function openConnect(){if(!_cnOs)_cnOs=detectOs();renderConnect();go('howto');}
+function cnOs(o){_cnOs=o;if(!APPS[o][_cnApp])_cnApp=Object.keys(APPS[o])[0];haptic('light');renderConnect();}
+function cnApp(a){_cnApp=a;haptic('light');renderConnect();}
+function renderConnect(){
+  if(!APPS[_cnOs][_cnApp])_cnApp=Object.keys(APPS[_cnOs])[0];
+  const apps=Object.keys(APPS[_cnOs]);
+  const has=!!_sub?.config_url;
+  document.getElementById('cn-body').innerHTML=`
+    <div class="oss">${OSES.map(([id,lb,ic])=>`<button class="os${id===_cnOs?' on':''}" onclick="cnOs('${id}')">${ICO[ic]}<span>${lb}</span></button>`).join('')}</div>
+    <div class="otag">Приложение</div>
+    <div class="appsel">${apps.map(a=>`<button class="appb${a===_cnApp?' on':''}" onclick="cnApp('${a}')"><b>${a==='incy'?'INCY':'Happ'}</b>${a==='incy'?'<span>Рекомендуем</span>':'<span>Проверенный</span>'}</button>`).join('')}</div>
+    <div class="cstep"><div class="cstep-n">1</div><div class="cstep-b">
+      <div class="cstep-t">Установи приложение</div>
+      <div class="cstep-d">Нажми кнопку и установи ${_cnApp==='incy'?'INCY':'Happ'} на это устройство.</div>
+      <div class="cbtns">${APPS[_cnOs][_cnApp].map(([lb,u])=>`<button class="cbtn" onclick="openExt('${u}')">${ICO.download}${lb}</button>`).join('')}</div>
+    </div></div>
+    <div class="cstep${has?'':' dim'}"><div class="cstep-n">2</div><div class="cstep-b">
+      <div class="cstep-t">Добавь подписку</div>
+      <div class="cstep-d">${has?'Приложение откроется, и подписка добавится сама.':'Подписки пока нет — оформи её, и кнопка станет активной.'}</div>
+      ${has?`<button class="btn btn-g" style="margin:12px 0 0" onclick="addSubscription()">${ICO.plus}Добавить подписку</button>
+      <button class="clink" onclick="copyConf()">${ICO.copy}Скопировать ссылку вручную</button>`:
+      `<button class="btn btn-g" style="margin:12px 0 0" onclick="go('plans')">Выбрать тариф</button>`}
+    </div></div>
+    <div class="cstep"><div class="cstep-n">${ICO.check}</div><div class="cstep-b">
+      <div class="cstep-t">Готово — включай</div>
+      <div class="cstep-d">Нажми большую кнопку включения в приложении. Сервер выбирается автоматически, при желании выбери другой в списке.</div>
+    </div></div>`;
+}
+
 function haptic(s){try{tg?.HapticFeedback?.impactOccurred(s);}catch(e){}}
 
 function copyConf(){
@@ -1253,7 +1599,7 @@ function showAbout(){go('about');}
 let _giftLink='',_giftSelPlan=null,_giftBalance=0;
 async function loadGift(){
   go('gift');
-  _giftSelPlan=PLANS[0];
+  _giftSelPlan=null;_giftTier='basic';
   const tgId=TGU?.id||(_DEMO?999999999:null);
   if(tgId&&!_DEMO){
     try{
@@ -1264,24 +1610,28 @@ async function loadGift(){
   } else if(_DEMO){_giftBalance=150;}
   _renderGiftPlans();
 }
+let _giftTier='basic';
 function _renderGiftPlans(){
   document.getElementById('gft-balance-val').textContent=_giftBalance+' ₽';
-  document.getElementById('gft-plans').innerHTML=PLANS.map((p,i)=>`
-    <div class="gft-plan${i===0?' sel':''}" onclick="selGiftPlan('${p.id}')">
-      <div class="gft-plan-l">
-        <div class="gft-plan-name">${esc(p.tierName||p.name||'')} ${p.emoji||''}</div>
-        <div class="gft-plan-sub">${p.label}</div>
-      </div>
-      <div class="gft-plan-price">${p.price} ₽</div>
-      <div class="gft-radio"><div class="gft-radio-dot"></div></div>
-    </div>`).join('');
+  document.getElementById('gft-tiers').innerHTML=TIERS.map(t=>`<button class="seg-b${t.id===_giftTier?' on':''}" onclick="selGiftTier('${t.id}')">${tierIcon(t.id)}<span>${esc(t.name)}</span><small>до ${t.devices} устр.</small></button>`).join('');
+  const tier=TIERS.find(t=>t.id===_giftTier)||TIERS[0];
+  if(!_giftSelPlan||!_giftSelPlan.id.startsWith(tier.id+'_'))_giftSelPlan=PLANS.find(p=>p.id===tier.durations[0].id);
+  document.getElementById('gft-plans').innerHTML=tier.durations.map(d=>{const m=Math.max(1,Math.round(d.days/30));
+    return`<button class="dur-opt${_giftSelPlan.id===d.id?' sel':''}" data-id="${d.id}" onclick="selGiftPlan('${d.id}')">
+      ${d.disc?`<span class="dur-chip">−${d.disc}%</span>`:''}
+      <span class="dur-label">${d.label}</span><span class="dur-price">${d.price} ₽</span>
+      <span class="dur-pm">${m>1?perMonth(d)+' ₽/мес':'&nbsp;'}</span></button>`;}).join('');
+  _giftBtn();
 }
+function _giftBtn(){
+  const b=document.getElementById('gft-btn');if(!b||!_giftSelPlan)return;
+  b.textContent=`Подарить за ${_giftSelPlan.price} ₽`;
+}
+function selGiftTier(id){_giftTier=id;_giftSelPlan=null;haptic('light');document.getElementById('gft-insuf').style.display='none';_renderGiftPlans();}
 function selGiftPlan(id){
-  _giftSelPlan=PLANS.find(p=>p.id===id)||PLANS[0];
-  document.querySelectorAll('.gft-plan').forEach(el=>{
-    el.classList.toggle('sel',el.getAttribute('onclick')===`selGiftPlan('${id}')`);
-  });
-  document.getElementById('gft-insuf').style.display='none';
+  _giftSelPlan=PLANS.find(p=>p.id===id)||PLANS[0];haptic('light');
+  document.querySelectorAll('#gft-plans .dur-opt').forEach(el=>el.classList.toggle('sel',el.dataset.id===id));
+  document.getElementById('gft-insuf').style.display='none';_giftBtn();
 }
 async function createGift(){
   const tgId=TGU?.id||(_DEMO?999999999:null);
@@ -1291,7 +1641,7 @@ async function createGift(){
     _giftBalance-=_giftSelPlan.price;
     _giftLink='https://t.me/ChameleonVPN05_bot?start=gift_DEMO123';
     document.getElementById('gft-link-box').textContent=_giftLink;
-    document.getElementById('gft-done-sub').textContent=`Подписка «${_giftSelPlan.name}» на ${_giftSelPlan.days} дней. Отправь ссылку другу — он нажмёт и получит доступ.`;
+    document.getElementById('gft-done-sub').textContent=`Подписка «${_giftSelPlan.tierName||_giftSelPlan.name}» на ${_giftSelPlan.label}. Отправь ссылку другу — он нажмёт и получит доступ.`;
     go('gift-done');return;
   }
   const btn=document.getElementById('gft-btn');
@@ -1304,19 +1654,19 @@ async function createGift(){
       _giftBalance=d.balance;
       _giftLink=d.link;
       document.getElementById('gft-link-box').textContent=d.link;
-      document.getElementById('gft-done-sub').textContent=`Подписка «${_giftSelPlan.name}» на ${_giftSelPlan.days} дней. Отправь ссылку другу — он нажмёт и получит доступ.`;
+      document.getElementById('gft-done-sub').textContent=`Подписка «${_giftSelPlan.tierName||_giftSelPlan.name}» на ${_giftSelPlan.label}. Отправь ссылку другу — он нажмёт и получит доступ.`;
       go('gift-done');
     } else if(d.insufficient){
       _showGiftInsuf();
     } else {toast(d.error||'Ошибка');}
   }catch(e){toast('Ошибка соединения');}
-  btn.disabled=false;btn.textContent='Создать подарок';
+  btn.disabled=false;_giftBtn();
 }
 function _showGiftInsuf(){
-  const need=_giftSelPlan.price,has=_giftBalance,short=need-has;
+  const short=_giftSelPlan.price-_giftBalance;
   const el=document.getElementById('gft-insuf');
-  el.innerHTML=`<div style="font-size:12px;color:var(--mut);margin-bottom:10px;line-height:1.6">Не хватает <b style="color:var(--acc)">${short} ₽</b> — пополни баланс и попробуй снова.</div><button class="btn btn-g" onclick="closeSheet();loadTopup()" style="margin-bottom:0">Пополнить баланс</button>`;
-  el.style.display='block';
+  el.innerHTML=`<div>Не хватает <b>${short} ₽</b> на балансе</div><button class="btn btn-d" style="margin:10px 0 0;height:48px" onclick="loadTopup()">Пополнить баланс</button>`;
+  el.style.display='block';haptic('heavy');
 }
 function copyGiftLink(){
   navigator.clipboard?.writeText(_giftLink).then(()=>toast('Ссылка скопирована')).catch(()=>{
@@ -1411,7 +1761,7 @@ function crSubmit(){
   if(!_cr.aud){toast('Укажи размер аудитории');return;}
   // TODO бэкенд: POST /api/creator-application (пока заявка уходит в поддержку вручную)
   haptic('heavy');
-  document.getElementById('cr-body').innerHTML=`<div class="cr-done"><div class="cr-done-ic">🚀</div>
+  document.getElementById('cr-body').innerHTML=`<div class="cr-done"><div class="cr-done-ic">${ICO.send}</div>
     <div class="ptitle" style="font-size:28px">Заявка отправлена</div>
     <div class="psub">Проверим ${esc(_cr.pl)} и напишем тебе в Telegram в течение 1–2 дней.</div>
     <button class="btn btn-d" onclick="go('referral')">Вернуться</button></div>`;
@@ -1462,7 +1812,7 @@ async function doLogin(){
       document.getElementById('splash')?.remove();
       document.getElementById('app').classList.add('on');window._hero?.start();
       btn.disabled=false;btn.textContent='Войти';
-      setTimeout(()=>{refreshBalance();apiFetch('/api/subscription').then(r=>r.json()).then(d=>{if(d.ok&&d.sub){_sub=d.sub;_balance=d.sub.balance||0;renderHomeStatus();}}).catch(()=>{});},100);
+      setTimeout(()=>{refreshBalance();apiFetch('/api/subscription').then(r=>r.json()).then(d=>{if(d.ok)setAdmin(d.is_admin);if(d.ok&&d.sub){_sub=d.sub;_balance=d.sub.balance||0;renderHomeStatus();}}).catch(()=>{});},100);
     }else{errEl.textContent=data.error||'Неверный код';btn.disabled=false;btn.textContent='Войти';}
   }catch(e){errEl.textContent='Ошибка соединения';btn.disabled=false;btn.textContent='Войти';}
 }
@@ -1541,6 +1891,8 @@ function initGlobe(){
   return stop;
 }
 
+document.querySelectorAll('[data-ico]').forEach(e=>{if(ICO[e.dataset.ico])e.innerHTML=ICO[e.dataset.ico];});
+setAdmin(false);
 renderPlans();
 syncPlans();
 renderHomeStatus();
@@ -1564,7 +1916,7 @@ async function refreshBalance(){
 if(!_DEMO&&(TGU?.id)){
   apiFetch(`/api/subscription?tg_id=${TGU.id}`)
     .then(r=>r.json())
-    .then(d=>{if(d.ok&&d.sub){_sub=d.sub;_balance=d.sub.balance||0;renderHomeStatus();}})
+    .then(d=>{if(d.ok)setAdmin(d.is_admin);if(d.ok&&d.sub){_sub=d.sub;_balance=d.sub.balance||0;renderHomeStatus();}})
     .catch(()=>{});
 }
 refreshBalance();

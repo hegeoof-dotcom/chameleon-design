@@ -13,9 +13,16 @@ const CONT=[
 [[82,-22],[82,-45],[76,-65],[70,-50],[64,-50],[60,-44],[62,-42],[65,-38],[72,-24],[76,-18],[80,-20]]];
 const NODES=[[51.5,-.1],[48.8,2.35],[55.7,37.6],[40.7,-74],[34,-118],[35.6,139.7],[1.3,103.8],[39.9,116.4],[28.6,77.2],[50.4,30.5],[41,29],[59.9,30.3]];
 const pts=[];
+if(window.CLAND){
+  // настоящие материки (Natural Earth): берег — яркие точки, суша — мягкая заливка
+  const dec=str=>{const a=str.split(',').map(Number),o=[];for(let i=0;i<a.length;i+=2)o.push([a[i]/10,a[i+1]/10]);return o;};
+  dec(CLAND.coast).forEach(([la,lo])=>{const[x,y,z]=ll(la,lo);pts.push({x,y,z,t:0,s:.55+Math.random()*.6,j:Math.random()});});
+  dec(CLAND.fill).forEach(([la,lo])=>{const[x,y,z]=ll(la,lo);pts.push({x,y,z,t:1,s:.55+Math.random()*.35,j:Math.random()});});
+}else{
 CONT.forEach(c=>{for(let i=0;i<c.length;i++){const a=c[i],b=c[(i+1)%c.length];const n=Math.max(2,Math.ceil(Math.hypot(b[0]-a[0],b[1]-a[1])/2));
   for(let t=0;t<n;t++){const f=t/n,la=a[0]+(b[0]-a[0])*f,lo=a[1]+(b[1]-a[1])*f;const[x,y,z]=ll(la,lo);pts.push({x,y,z,t:0,s:.5+Math.random()*.9,j:Math.random()});
     if(Math.random()<.4){const[sx,sy,sz]=ll(la+(Math.random()-.5)*7,lo+(Math.random()-.5)*7);pts.push({x:sx,y:sy,z:sz,t:1,s:.15+Math.random()*.45,j:Math.random()});}}}});
+}
 NODES.forEach(([la,lo])=>{const[x,y,z]=ll(la,lo);pts.push({x,y,z,t:2,s:2.2+Math.random()*.8,j:Math.random()});});
 const phi=Math.PI*(3-Math.sqrt(5));
 for(let i=0;i<120;i++){const yy=1-(i/119)*2,r=Math.sqrt(1-yy*yy),tt=phi*i;pts.push({x:Math.cos(tt)*r,y:yy,z:Math.sin(tt)*r,t:3,s:.12+Math.random()*.25,j:Math.random()});}
@@ -46,12 +53,12 @@ function draw(ctx,o){
     if(reveal<1){const d=Math.hypot(px,py);ra=clamp((reveal*1.5-d*.9-p.j*.25)/.25);if(ra<=0)continue;}
     pr.push({sx:cx+px*R,sy:cy+py*R,sc:(tz+1.5)/2.5,s:p.s,t:p.t,ra,beam:Math.max(0,(p.x*cS+p.z*sS-.965)*28),lit:Math.max(0,.45-py*.55)});
   }
-  pr.sort((a,b)=>a.sc-b.sc);
+  pr.sort((a,b)=>a.t===2?1:b.t===2?-1:0); // узлы поверх, остальное без сортировки — быстрее
   const k=R/120;
   for(const p of pr){
     const{sc,s,t,beam,lit,ra}=p;let a,sz;
     if(t===0){a=Math.pow(sc,1.1)*.9*lit+beam*.45;sz=s*sc*1.3;}
-    else if(t===1){a=Math.pow(sc,1.9)*.55*lit+beam*.2;sz=s*sc;}
+    else if(t===1){a=(window.CLAND?.3:.55)*Math.pow(sc,1.9)*lit+beam*.2;sz=s*sc;}
     else if(t===2){a=sc*.95;sz=s*Math.max(.5,sc);
       // узел: при появлении «хлопает» кольцом
       const pop=ra<1?1+(1-ra)*2.2:1;
@@ -61,7 +68,9 @@ function draw(ctx,o){
     sz*=ds*Math.max(.6,Math.min(1.3,k));
     a*=ra;
     if(!sz||sz<.06||a<.012)continue;
-    ctx.beginPath();ctx.arc(p.sx,p.sy,Math.max(.18,sz),0,Math.PI*2);ctx.fillStyle=`rgba(252,18,34,${Math.min(1,a)})`;ctx.fill();
+    ctx.fillStyle=`rgba(252,18,34,${Math.min(1,a)})`;
+    if(sz<1.3){const d=Math.max(.5,sz*1.7);ctx.fillRect(p.sx-d/2,p.sy-d/2,d,d);}
+    else{ctx.beginPath();ctx.arc(p.sx,p.sy,sz,0,Math.PI*2);ctx.fill();}
   }
   ctx.restore();
 }
