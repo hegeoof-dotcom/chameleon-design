@@ -1509,14 +1509,22 @@ function initGlobe(){
   const cv=document.getElementById('ptc'),ctx=cv.getContext('2d');
   if(!ctx||!window.CGlobe)return Object.assign(()=>{},{flyTo(){},angle:()=>-.9});
   const DPR=Math.min(devicePixelRatio||1,2);
-  const W=innerWidth||390,H=innerHeight||844;
-  cv.width=W*DPR;cv.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);
-  const cx=W/2,cy=H*.42,R=Math.min(W,H)*.31;
+  // Telegram может развернуть окно уже после старта — подгоняем холст под реальный размер,
+  // иначе браузер растягивает старую картинку и планета становится овалом
+  let W=0,H=0,cx=0,cy=0,R=0;
+  function fit(){
+    const w=Math.round(cv.clientWidth||innerWidth||390),h=Math.round(cv.clientHeight||innerHeight||844);
+    if(w===W&&h===H)return;
+    W=w;H=h;cv.width=W*DPR;cv.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);
+    cx=W/2;cy=H*.42;R=Math.min(W,H)*.31;
+  }
+  fit();
   const t0=performance.now();let ang=-0.9,scan=0,run=true,fly=null,last=t0;
   const eo=t=>1-Math.pow(1-t,3),eio=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2,cl=v=>Math.max(0,Math.min(1,v)),lp=(a,b,k)=>a+(b-a)*k;
   function draw(now){
     if(!run)return;
     const dt=Math.min(50,now-last);last=now;const t=(now-t0)/1000;
+    fit();
     ctx.clearRect(0,0,W,H);
     ang-=.0016*dt/16;scan+=.007*dt/16;
     // появление: планета собирается от центра наружу, узлы «хлопают», лёгкое приближение
